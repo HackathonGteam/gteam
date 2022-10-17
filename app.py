@@ -6,7 +6,7 @@ app = Flask(__name__)
 def index():
     return 'Hello World'
 
-#チャネルの作成
+#チャネルの作成する
 
 
 if __name__ == '__main__':
