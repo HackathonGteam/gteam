@@ -61,6 +61,13 @@ def userLogin():
         return redirect('/')
 
 
+# ログアウト機能
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/login')
+
+
 @app.route('/')
 def index():
     return 'Hello World'
