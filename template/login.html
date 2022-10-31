@@ -1,0 +1,23 @@
+{% extends 'base.html' %}<!-- base.htmlを継承して利用する -->
+{% block title %}
+    <title>login</title>
+{% block body %}
+    <div class="login">
+    <h1>チャットアプリへようこそ！</h1>
+    <h2>ログイン</h2>
+    <h3>ユーザー名とe-mailアドレス、パスワードを入力してください</h3>
+    <!--POSTで/loginにログイン情報を送信する-->
+    <form method="post" action="/login">
+        <dl>
+            <dt>ユーザー名を入力してください:</dt>
+                <dd><input typt="text" name="user"></dd>
+            <dt>e-mailアドレスを入力してください</dt>
+                <dd><input type="text" name="e-mail"></dd>
+            <dt>パスワードを入力してください:</dt>
+                <dd><input type="password" name="password"></dd>
+        </dl>
+        <!--ログイン情報入力後、index.htmlに遷移-->
+        <p><input type="button" href="index.html" value=ログイン></p>
+    </div>
+    </form>
+{% endblock %}
