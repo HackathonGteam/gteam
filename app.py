@@ -39,7 +39,7 @@ def add_message():
 
 #メッセージ一覧機能
 #/messageにアクセスされた場合の処理
-@app.route('/detale/<cid>')
+@app.route('/detail/<cid>')
 #関数detailの定義
 def detail(cid):
 	#uidにおそらくuidを格納
