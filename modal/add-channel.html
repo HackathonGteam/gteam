@@ -1,0 +1,15 @@
+<!--モーダルでチャンネル追加を実装-->
+<div id="add-channel-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>チャンネルを追加</h3>
+            <span class="modalClose" id="add-page-close-btn">x</span>
+        </div>
+        <!--POSTでチャンネル追加情報を送信する-->
+        <form class="modal-body" action="/" method="post">
+            <input type="text" placeholder="チャンネル名" name="channel-title"/>
+            <input type="text" placeholder="チャンネル説明" name="channel-description"/>
+            <button id="add-channel-confirmation-btn">登録</button>
+        </form>
+    </div>
+</div>
