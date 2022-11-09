@@ -24,14 +24,14 @@ def userSignup():
     # フォームで入力された情報の取得
     name = request.form.get('name')
     email = request.form.get('email')
-    password1 = request.form.get('password1')
-    password2 = request.form.get('password2')
+    password = request.form.get('password')
+    confirm_password = request.form.get('confirm_password')
 
     # ユーザーidの生成
     uid = str(uuid.uuid4())
 
     # データベースの操作
-    dbConnect.createUser(uid, name, email, password1)
+    dbConnect.createUser(uid, name, email, password)
     # セッションの確立
     session['uid'] = uid
 
