@@ -10,15 +10,12 @@
     <!--POSTで/loginにログイン情報を送信する-->
     <form method="post" action="/login">
         <dl>
-            <dt>ユーザー名を入力してください:</dt>
-                <dd><input typt="text" name="user"></dd>
             <dt>e-mailアドレスを入力してください</dt>
-                <dd><input type="text" name="e-mail"></dd>
+                <dd><input type="text" name="email"></dd>
             <dt>パスワードを入力してください:</dt>
                 <dd><input type="password" name="password"></dd>
         </dl>
-        <!--ログイン情報入力後、index.htmlに遷移-->
-        <p><input type="button" href="index.html" value=ログイン></p>
-    </div>
     </form>
+        <button>ログイン</button>
+    </div>
 {% endblock %}
