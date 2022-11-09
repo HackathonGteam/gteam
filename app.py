@@ -15,7 +15,7 @@ app.permanent_session_lifetime = timedelta(days=30)
 # サインアップページにページ遷移
 @app.route('/signup')
 def signup():
-    return render_template('registration/signup.html')
+    return render_template('signup.html')
 
 
 # サインアップ機能
@@ -41,7 +41,7 @@ def userSignup():
 # ログインページにページ遷移
 @app.route('/login')
 def login():
-    return render_template('registration/login.html')
+    return render_template('login.html')
 
 
 # ログイン機能
