@@ -18,6 +18,22 @@ class dbConnect:
             conn.close()
 
 
+    def getUser(name):
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT * FROM users WHERE email=%s;"
+            cur.execute(sql, (name))
+            user = cur.fetchone()
+            return user
+        except Exception as e:
+            print(e + 'が発生しています')
+            return None
+        finally:
+            cur.close
+            conn.close()
+
+
     def getUser(email):
         try:
             conn = DB.getConnection()
