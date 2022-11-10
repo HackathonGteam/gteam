@@ -3,6 +3,7 @@
     <title>login</title>
 {% endblock %}
 {% block body %}
+<!--ログイン画面の作成-->
     <div class="login">
     <h1>MOSS Chatへようこそ！</h1>
     <h2>ログイン</h2>
@@ -17,8 +18,7 @@
             <dt>パスワードを入力してください:</dt>
                 <dd><input type="password" name="password"></dd>
         </dl>
-        <!--ログイン情報入力後、index.htmlに遷移-->
-        <p><input type="button" href="index.html" value=ログイン></p>
-    </div>
+        <button>ログイン</button>
     </form>
+    </div>
 {% endblock %}
