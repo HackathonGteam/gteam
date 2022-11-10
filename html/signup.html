@@ -3,6 +3,7 @@
     <title>signup</title>
 {% endblock %}
 {% block body %}
+<!--新規会員登録画面の作成-->
     <div class="signup">
         <h1>MOSS Chatへようこそ！</h1>
         <h2>新規会員登録はこちらから</h2>
@@ -11,7 +12,7 @@
         <form method="post" action="/signup">
             <dl>    
                 <dt>ユーザー名を登録してください</dt>
-                    <dd><input type="text" name="user"></dd>
+                    <dd><input type="text" name="name"></dd>
                 <dt>e-mailアドレスを入力してください</dt>
                     <dd><input type="text" name="email"></dd>
                 <dt>パスワードを入力してください</dt>
@@ -19,8 +20,7 @@
                 <dt>パスワードを再度入力してください</dt>
                     <dd><input type="password" name="confirm_password"></dd>
             </dl>
-        <!--会員情報を送信後、login.htmlへ遷移-->
-        <p><input type="button" href="login.html" value="会員登録"></p>
+            <button>会員登録</button>
+        </form>
     </div>
-</form>
 {% endblock %}
