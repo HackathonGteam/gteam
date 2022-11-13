@@ -1,0 +1,22 @@
+{% extends 'base.html' %}<!-- base.htmlを継承して利用する -->
+{% block title %}
+    <title>login</title>
+{% endblock %}
+{% block body %}
+<!--ログイン画面の作成-->
+    <div class="login">
+    <h1>MOSS Chatへようこそ！</h1>
+    <h2>ログイン</h2>
+    <h3>ユーザー名とメールアドレス、パスワードを入力してください</h3>
+    <!--POSTで/loginにログイン情報を送信する-->
+    <form method="post" action="/login">
+        <dl>
+            <dt>メールアドレスを入力してください</dt>
+                <dd><input type="text" name="email"></dd>
+            <dt>パスワードを入力してください:</dt>
+                <dd><input type="password" name="password"></dd>
+        </dl>
+        <button>ログイン</button>
+    </form>
+    </div>
+{% endblock %}
