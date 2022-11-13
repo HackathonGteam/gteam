@@ -23,4 +23,14 @@
             <button>会員登録</button>
         </form>
     </div>
+    <!-- ユーザーが不適切な値を入力した時に、その理由を表示する -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 {% endblock %}
