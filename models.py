@@ -18,11 +18,11 @@ class dbConnect:
             conn.close()
 
 
-    def getUser(name):
+    def getUserByName(name):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
-            sql = "SELECT * FROM users WHERE email=%s;"
+            sql = "SELECT * FROM users WHERE user_name=%s;"
             cur.execute(sql, (name))
             user = cur.fetchone()
             return user
@@ -34,7 +34,7 @@ class dbConnect:
             conn.close()
 
 
-    def getUser(email):
+    def getUserByEmail(email):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()

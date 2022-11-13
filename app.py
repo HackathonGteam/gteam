@@ -37,9 +37,9 @@ def userSignup():
     confirm_password = request.form.get('confirm_password')
 
     # データベースからユーザー名でユーザーを取得
-    userByName = dbConnect.getUser(name)
+    userByName = dbConnect.getUserByName(name)
     # データベースからメールアドレスでユーザーを取得
-    userByEmail = dbConnect.getUser(email)
+    userByEmail = dbConnect.getUserByEmail(email)
 
     # ユーザー名の妥当性をチェック
     if name == "":
@@ -104,7 +104,7 @@ def userLogin():
     password = request.form.get('password')
 
     # データベースからメールアドレスでユーザーを取得
-    user = dbConnect.getUser(email)
+    user = dbConnect.getUserByEmail(email)
 
     if email == "" or password == "":
         if email == "":
