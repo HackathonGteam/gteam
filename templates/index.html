@@ -1,0 +1,47 @@
+{% extends 'base.html' %}<!-- base.htmlを継承して利用する -->
+{% block title %}
+    <title>home</title>
+{% endblock %}
+{% block body %}
+  <div class="main-container channelpage">
+    <div class="main-content">
+      <div class="channel-title">
+        <h1>チャンネル一覧</h1>
+        <p>チャンネルを追加</p>
+        <!--formタグでチャンネル追加を実装(classはsampleより引用)
+        action属性はまだ確認中-->
+        <form id="add-channel" action="" method="post">
+          <!--チャンネル名の追加-->
+          <input 
+          type="text"
+          placeholder="チャンネル名"
+          class="channel-form-input"
+          name="channel-title"
+          />
+          <!--チャンネルの説明-->
+          <input
+          type="text"
+          placeholder="チャンネル説明"
+          class="channel-form-input"
+          name="channel-description"
+          />
+          <button id="add-channel-confirmation-btn">登録</button>
+        </form>
+      </div>
+      <div class="channel-list">
+        <h3>チャンネルリスト</h3>
+          <!--pythonのfor文を使用し、チャンネルリストにチャンネル名を表示する。
+          channel-listとchannel-nameはsampleより引用-->
+          {% for channel-list in channel-name %}
+            <li><a id="channel-name" href="/detail.html">{{channel-list}}</a></li>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block script %}
+  <script type="text/javascript">
+    const channels = JSON.parse('{{ channels|tojson }}')
+    const uid = JSON.parse('{{ uid|tojson }}');
+  </script>
+{% endblock %}
