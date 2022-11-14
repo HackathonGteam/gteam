@@ -5,18 +5,28 @@
 {% block body %}
 <!--ログイン画面の作成-->
     <div class="login">
-    <h1>MOSS Chatへようこそ！</h1>
-    <h2>ログイン</h2>
-    <h3>ユーザー名とメールアドレス、パスワードを入力してください</h3>
-    <!--POSTで/loginにログイン情報を送信する-->
-    <form method="post" action="/login">
-        <dl>
-            <dt>メールアドレスを入力してください</dt>
-                <dd><input type="text" name="email"></dd>
-            <dt>パスワードを入力してください:</dt>
-                <dd><input type="password" name="password"></dd>
-        </dl>
-        <button>ログイン</button>
-    </form>
+        <h1>MOSS Chatへようこそ！</h1>
+        <h2>ログイン</h2>
+        <h3>ユーザー名とメールアドレス、パスワードを入力してください</h3>
+        <!--POSTで/loginにログイン情報を送信する-->
+        <form method="post" action="/login">
+            <dl>
+                <dt>メールアドレスを入力してください</dt>
+                    <dd><input type="text" name="email"></dd>
+                <dt>パスワードを入力してください:</dt>
+                    <dd><input type="password" name="password"></dd>
+            </dl>
+            <button>ログイン</button>
+        </form>
     </div>
+    <!-- ユーザーが不適切な値を入力した時に、その理由を表示する -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
 {% endblock %}
