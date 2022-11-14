@@ -135,6 +135,72 @@ def index():
     return 'Hello World'
 
 
+# メッセージ一覧機能
+@app.route('/detail/<cid>')
+def detail(cid):
+    uid = session.get('uid')
+    # もしuidが空だったらログインページにリダイレクト
+    if uid is None:
+        return redirect('/login')
+
+    cid = cid
+    # データベースからチャンネルを取得する
+    channel = dbConnect.getChannelById(cid)
+    # データベースから全てのメッセージを取得する
+    messages = dbConnect.getMessageAll(cid)
+
+    return render_template('detail.html', messages=messages, channel=channel, uid=uid)
+
+
+# メッセージ作成機能
+# /messageにアクセスされPOSTメソッドでデータが送信された場合の処理
+@app.route('/message', methods=['POST'])
+def add_message():
+    uid = session.get('uid')
+    # もしuidが空だったらログインページにリダイレクト
+    if uid is None:
+        return redirect('/login')
+
+    # messageとchannel_idをリクエスト
+    message = request.form.get('message')
+    channel_id = request.form.get('channel_id')
+
+    # 入力されたメッセージが空でなければデータベースを操作しメッセージを作成する
+    if message:
+        dbConnect.createMessage(uid, channel_id, message)
+
+    # データベースからチャンネルを取得する
+    channel = dbConnect.getChannelById(channel_id)
+    # データベースから全てのメッセージを取得する
+    messages = dbConnect.getMessageAll(channel_id)
+
+    return render_template('detail.html', messages=messages, channel=channel, uid=uid)
+
+
+# メッセージ削除機能
+# /deletemessageにアクセスされPOSTメソッドでデータが送信された場合の処理
+@app.route('/delete_message', methods=['POST'])
+def delete_message():
+    uid = session.get('uid')
+    #もしuidが空だったらログインページにリダイレクト
+    if uid is None:
+        return redirect('/login')
+
+    # message_idとchannel_idをリクエスト
+    message_id = request.form.get('message_id')
+    cid = request.form.get('channel_id')
+
+    if message_id:
+        dbConnect.deleteMessage(message_id)
+
+    # データベースからチャンネルを取得する
+    channel = dbConnect.getChannelById(cid)
+    # データベースから全てのメッセージを取得する
+    messages = dbConnect.getMessageAll(cid)
+
+    return render_template('detail.html', messages=messages, channel=channel, uid=uid)
+
+
 #チャネルの作成する
 
 
