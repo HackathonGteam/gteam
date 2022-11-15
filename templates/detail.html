@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}
+  <title>chatroom</title>
+{% endblock %}
+{% block body %}
+  <div class="main-container">
+    <div class="chat-box">
+      <div id="chat-header">
+        <!--Flaskでヘッダーにチャンネル名を表示-->
+        <p id="chatroom-name">{{ channel.name }}</p>
+      </div>
+      <!--ここからチャットエリア-->
+      <div id="message-area">
+        <!--pythonのif文とfor文を使用し、メッセージのエラーをチェックする-->
+        {% if messages|length > 0 %}
+          {% for message in messages %}
+            {% if message.user.id == user.id %}
+              <div class="my-messages">
+                <p class="box box-right">{{ message.message }}</p>
+                <form action="/delete_message" method="post">
+                  <input type="hidden" value="{{ channel.id }}" name="channel_id" />
+                  <button
+                    class="delete-message-btn"
+                    name="message_id"
+                    value="{{ message.id }}"
+                  >削除</button>
+                </form>
+              </div>
+              {% else %}
+                <!--DBからメッセージを取得しチャットに表示する-->
+                <div class="messages">
+                  <p class="user-name">{{ message.user_name }}</p>
+                  <p class="box box-left">{{ message.message }}</p>
+                </div>
+            {% endif %}
+          {% endfor %}
+          {% else %}
+            <!--メッセージが入力されていなければ表示-->
+            <div><p>まだメッセージがありません</p></div>
+        {% endif %}
+      </div>
+      <!--入力したメッセージをPOSTで”/message"へ送信-->
+      <div class="typing-box-wrapper">
+        <form class="typing-box" action="/message" method="post">
+          <textarea name="message" id="message" autofocus></textarea>
+            <input type="hidden" name="channel_id" value="{{ channel.id }}" />
+            <button type="submit" id="add-message-btn">投稿</button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+{% block script %}
+  <!--pythonのFlaskからJSON形式でJSファイルに変数を渡す。
+  テンプレートで使用しているJinja2の構文を利用。-->
+  <script type="text/javascript">
+    const channel = JSON.parse('{{ channel|tojson }}');
+    const uid = JSON.parse('{{ uid|tojson }}');
+  </script>
+  <!--JSで画面がスクロールする-->
+  <script
+    src="{{url_for('static',filename='js/scroll-message.js')}}"
+    type="text/javascript"
+  ></script>
+{% endblock %}

@@ -18,9 +18,9 @@
             </dl>
             <button>ログイン</button>
         </form>
-    </div>
-    <!-- ユーザーが不適切な値を入力した時に、その理由を表示する -->
-    {% with messages = get_flashed_messages() %}
+	</div>
+	<!-- ユーザーが不適切な値を入力した時に、その理由を表示する -->
+	{% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul>
                 {% for message in messages %}
@@ -28,5 +28,5 @@
                 {% endfor %}
             </ul>
         {% endif %}
-    {% endwith %}
+	{% endwith %}
 {% endblock %}
