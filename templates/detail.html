@@ -12,9 +12,9 @@
       <!--ここからチャットエリア-->
       <div id="message-area">
         <!--pythonのif文とfor文を使用し、メッセージのエラーをチェックする-->
-        {% if messages|length > 0 %}
+        {% if messages | length > 0 %}
           {% for message in messages %}
-            {% if message.user.id == user.id %}
+            {% if message.uid == uid %}
               <div class="my-messages">
                 <p class="box box-right">{{ message.message }}</p>
                 <form action="/delete_message" method="post">
@@ -26,25 +26,25 @@
                   >削除</button>
                 </form>
               </div>
-              {% else %}
-                <!--DBからメッセージを取得しチャットに表示する-->
-                <div class="messages">
-                  <p class="user-name">{{ message.user_name }}</p>
-                  <p class="box box-left">{{ message.message }}</p>
-                </div>
+            {% else %}
+              <!--DBからメッセージを取得しチャットに表示する-->
+              <div class="messages">
+                <p class="user-name">{{ message.user_name }}</p>
+                <p class="box box-left">{{ message.message }}</p>
+              </div>
             {% endif %}
           {% endfor %}
-          {% else %}
-            <!--メッセージが入力されていなければ表示-->
-            <div><p>まだメッセージがありません</p></div>
+        {% else %}
+          <!--メッセージが入力されていなければ表示-->
+          <div><p>まだメッセージがありません</p></div>
         {% endif %}
       </div>
       <!--入力したメッセージをPOSTで”/message"へ送信-->
       <div class="typing-box-wrapper">
         <form class="typing-box" action="/message" method="post">
           <textarea name="message" id="message" autofocus></textarea>
-            <input type="hidden" name="channel_id" value="{{ channel.id }}" />
-            <button type="submit" id="add-message-btn">投稿</button>
+          <input type="hidden" name="channel_id" value="{{ channel.id }}">
+          <button type="submit" id="add-message-btn">投稿</button>
         </form>
       </div>
     </div>
