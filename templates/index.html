@@ -34,7 +34,7 @@
           channel-listとchannel-nameはsampleより引用-->
           {% for channel in channels %}
             <li>
-              <a href="{{ url_for('detail', cid=channel.id) }}">{{ channel.name }}</a>
+              <a href="{{ url_for('detail', channelId=channel.channel_id) }}">{{ channel.channel_name }}</a>
             </li>
           {% endfor %}
       </div>
