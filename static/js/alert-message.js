@@ -2,13 +2,13 @@
 document.messageForm.btn.addEventListener('click', function() {
 
   // メッセージ内容を取得
-  var message = document.getElementById("message").value;
+  let message = document.getElementById("message").value;
   // アラートフラグ
-  var alertFlg = false;
+  let alertFlg = false;
   
   // メッセージ内容に不適切用語が存在するかを確認
-  for (var i = 0; i < badMessages.length; i++) {
-    var badM = badMessages[i]
+  for (let i = 0; i < badMessages.length; i++) {
+    let badM = badMessages[i]
     if(message.indexOf(badM) != -1) {
       alertFlg = true;
       break;
@@ -31,4 +31,4 @@ document.messageForm.btn.addEventListener('click', function() {
   
 })
 
-var badMessages = ["バカ", "クソ", "死ね"]
+const badMessages = ["バカ", "クソ", "死ね", "〇ね", "馬鹿", "はげ", "禿", "ハゲ", "〇げ"]
