@@ -16,14 +16,14 @@
           type="text"
           placeholder="チャンネル名"
           class="channel-form-input"
-          name="channel-title"
+          name="channelName"
           />
           <!--チャンネルの説明-->
           <input
           type="text"
           placeholder="チャンネル説明"
           class="channel-form-input"
-          name="channel-description"
+          name="channelDescription"
           />
           <button id="add-channel-confirmation-btn">登録</button>
         </form>
@@ -34,7 +34,7 @@
           channel-listとchannel-nameはsampleより引用-->
           {% for channel in channels %}
             <li>
-              <a href="{{ url_for('detail', channelId=channel.channel_id) }}">{{ channel.channel_name }}</a>
+              <a href="{{ url_for('detail', channelId=channel.CHANNEL_ID) }}">{{ channel.CHANNEL_NAME }}</a>
             </li>
           {% endfor %}
       </div>
@@ -44,6 +44,6 @@
 {% block script %}
   <script type="text/javascript">
     const channels = JSON.parse('{{ channels|tojson }}')
-    const uid = JSON.parse('{{ uid|tojson }}');
+    const userId = JSON.parse('{{ userId|tojson }}');
   </script>
 {% endblock %}

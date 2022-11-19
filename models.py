@@ -116,12 +116,13 @@ class dbConnect:
             conn.close()
             
 
+
     def getChannelAll():
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
             #全チャンネルを取得
-            sql = "SELECT * FROM channels;"
+            sql = "SELECT * FROM CHANNELS;"
             cur.execute(sql)
             channels = cur.fetchall()
             return channels
@@ -131,30 +132,14 @@ class dbConnect:
         finally:
             cur.close()
 
-        # チャンネルIDでチャンネルを取得
-    def getChannelById(cid):
-        try:
-            conn = DB.getConnection()
-            cur = conn.cursor()
-            #IDからチャンネルを取得
-            sql = "SELECT * FROM channels WHERE id=%s;"
-            cur.execute(sql, (cid))
-            channel = cur.fetchone()
-            return channel
-        except Exception as e:
-            print(e + 'が発生しています')
-            return None
-        finally:
-            cur.close()
 
-
-    def getChannelByName(channel_name):
+    def getChannelByName(channelName):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
             #チャンネル名からチャンネル名を取得する
-            sql = "SELECT * FROM channels WHERE name=%s;"
-            cur.execute(sql, (channel_name))
+            sql = "SELECT * FROM CHANNELS WHERE CHANNEL_NAME=%s;"
+            cur.execute(sql, (channelName))
             channel = cur.fetchone()
             return channel
         except Exception as e:
@@ -164,13 +149,13 @@ class dbConnect:
             cur.close()
 
 
-    def addChannel(uid, newChannelName, newChannelDescription):
+    def addChannel(userId, ChannelName, ChannelDescription):
         try:
             conn = DB.getConnection()
             cur = conn.cursor()
             #チャンネルを登録する
-            sql = "INSERT INTO channels (uid, name, abstract) VALUES (%s, %s, %s);"
-            cur.execute(sql, (uid, newChannelName, newChannelDescription))
+            sql = "INSERT INTO CHANNELS (USER_ID, CHANNEL_NAME, ABSTRACT) VALUES (%s, %s, %s);"
+            cur.execute(sql, (userId, ChannelName, ChannelDescription))
             conn.commit()
         except Exception as e:
             print(e + 'が発生しています')
@@ -179,40 +164,24 @@ class dbConnect:
             cur.close()
 
 
-    def getChannelByName(channel_name):
-        try:
-            conn = DB.getConnection()
-            cur = conn.cursor()
-            #チャンネル名からチャンネル情報を取得
-            sql = "SELECT * FROM channels WHERE name=%s;"
-            cur.execute(sql, (channel_name))
-            channel = cur.fetchone()
-        except Exception as e:
-            print(e + 'が発生しました')
-            return None
-        finally:
-            cur.close()
-            return channel
-
-
-    def updateChannel(uid, newChannelName, newChannelDescription, cid):
+    def updateChannel(userId, ChannelName, ChannelDescription, channelId):
         conn = DB.getConnection()
         cur = conn.cursor()
         #チャンネル情報を更新
-        sql = "UPDATE channels SET uid=%s, name=%s, abstract=%s WHERE id=%s;"
-        cur.execute(sql, (uid, newChannelName, newChannelDescription, cid))
+        sql = "UPDATE CHANNELS SET USER_ID=%s, CHANNEL_NAME=%s, ABSTRACT=%s WHERE CHANNEL_ID=%s;"
+        cur.execute(sql, (userId, ChannelName, ChannelDescription, channelId))
         conn.commit()
         cur.close()
 
 
     #deleteチャンネル関数
-    def deleteChannel(cid):
-        try: 
+    def deleteChannel(channelId):
+        try:
             conn = DB.getConnection()
             cur = conn.cursor()
             #チャンネルを削除
-            sql = "DELETE FROM channels WHERE id=%s;"
-            cur.execute(sql, (cid))
+            sql = "DELETE FROM CHANNELS WHERE CHANNEL_ID=%s;"
+            cur.execute(sql, (channelId))
             conn.commit()
         except Exception as e:
             print(e + 'が発生しています')
