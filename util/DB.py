@@ -5,9 +5,9 @@ class DB:
         try:
             conn = pymysql.connect(
             host="localhost",
-            db="chatapp",
-            user="testuser",
-            password="testuser",
+            db="MOSSCHAT",
+            user="MOSSUSER",
+            password="YxADUh64Hf_L",
             charset="utf8",
             cursorclass=pymysql.cursors.DictCursor
         )
