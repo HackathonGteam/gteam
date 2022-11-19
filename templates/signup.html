@@ -1,36 +1,47 @@
-{% extends 'base.html' %}<!-- base.htmlを継承して利用する -->
+{% extends 'base.html' %} <!-- base.htmlを継承して利用する -->
 {% block title %}
-    <title>signup</title>
+  <title>signup</title>
 {% endblock %}
 {% block body %}
-<!--新規会員登録画面の作成-->
-    <div class="signup">
-        <h1>MOSS Chatへようこそ！</h1>
-        <h2>新規会員登録はこちらから</h2>
-        <h3>メールアドレスとパスワードを登録してください</h3>
-        <!--POSTで/signupにユーザー情報を送信する-->
-        <form method="post" action="/signup">
-            <dl>    
-                <dt>ユーザー名を登録してください</dt>
-                    <dd><input type="text" name="name"></dd>
-                <dt>メールアドレスを入力してください</dt>
-                    <dd><input type="text" name="email"></dd>
-                <dt>パスワードを入力してください</dt>
-                    <dd><input type="password" name="password"></dd>
-                <dt>パスワードを再度入力してください</dt>
-                    <dd><input type="password" name="confirm_password"></dd>
-            </dl>
-            <button>会員登録</button>
-        </form>
+  <!--新規会員登録画面の作成-->
+  <div class="registration-wrapper" >
+    <div class="container">
+      <div class="registration">
+        <div class="registration-top">
+          <h1>Welcome to MO<span>SS</span> Chat !!</h1>
+        </div>
+        <div class="registration-content">
+          <div class="registration-left"></div>
+          <div class="registration-form">
+            <h2>SIGN UP</h2>
+            <!--POSTで/signupにユーザー情報を送信する-->
+            <form method="post" action="/signup">
+              <p>ユーザーネーム</p>
+              <input type="text" name="name">
+              <p>メールアドレス</p>
+              <input type="text" name="email">
+              <p>パスワード</p>
+              <input type="password" name="password">
+              <p>パスワード（確認）</p>
+              <input type="password" name="confirm_password">
+              <button>SIGN UP</button>
+            </form>
+            <a class="registration-switch" href="{{ url_for('login') }}">LOG IN</a>
+          </div>
+          <div class="registration-message">
+            <!-- ユーザーが不適切な値を入力した時に、その理由を表示する -->
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="feedback">
+                  {% for message in messages %}
+                    <p>{{ message }}</p>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- ユーザーが不適切な値を入力した時に、その理由を表示する -->
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+  </div>
 {% endblock %}
