@@ -1,32 +1,43 @@
 {% extends 'base.html' %}<!-- base.htmlを継承して利用する -->
 {% block title %}
-    <title>login</title>
+  <title>login</title>
 {% endblock %}
 {% block body %}
-<!--ログイン画面の作成-->
-    <div class="login">
-        <h1>MOSS Chatへようこそ！</h1>
-        <h2>ログイン</h2>
-        <h3>ユーザー名とメールアドレス、パスワードを入力してください</h3>
-        <!--POSTで/loginにログイン情報を送信する-->
-        <form method="post" action="/login">
-            <dl>
-                <dt>メールアドレスを入力してください</dt>
-                    <dd><input type="text" name="email"></dd>
-                <dt>パスワードを入力してください:</dt>
-                    <dd><input type="password" name="password"></dd>
-            </dl>
-            <button>ログイン</button>
-        </form>
-	</div>
-	<!-- ユーザーが不適切な値を入力した時に、その理由を表示する -->
-	{% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-	{% endwith %}
+  <!--ログイン画面の作成-->
+  <div class="registration-wrapper">
+    <div class="container">
+      <div class="registration">
+        <div class="registration-top">
+          <h1>Welcome to back !!</h1>
+        </div>
+        <div class="registration-content">
+          <div class="registration-left"></div>
+          <div class="registration-form">
+            <h2>LOG IN</h2>
+            <!--POSTで/loginにログイン情報を送信する-->
+            <form method="post" action="/login">
+              <p>メールアドレス</p>
+              <input type="text" name="email" autofocus>
+              <p>パスワード</p>
+              <input type="password" name="password">
+              <button>LOG IN</button>
+              <a class="registration-switch" href="{{ url_for('signup') }}">SIGN UP</a>
+            </form>
+          </div>
+          <div class="registration-message">
+            <!-- ユーザーが不適切な値を入力した時に、その理由を表示する -->
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="feedback">
+                  {% for message in messages %}
+                    <p>{{ message }}</p>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}
