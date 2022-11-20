@@ -7,30 +7,30 @@
     <div class="chat-box">
       <div id="chat-header">
         <!--Flaskでヘッダーにチャンネル名を表示-->
-        <p id="chatroom-name">{{ channel.name }}</p>
+        <p id="chatroom-name">{{ channel.CHANNEL_NAME }}</p>
       </div>
       <!--ここからチャットエリア-->
       <div id="message-area">
         <!--pythonのif文とfor文を使用し、メッセージのエラーをチェックする-->
         {% if messages | length > 0 %}
           {% for message in messages %}
-            {% if message.uid == uid %}
+            {% if message.USER_ID == userId %}
               <div class="my-messages">
-                <p class="box box-right">{{ message.message }}</p>
+                <p class="box box-right">{{ message.MESSAGE }}</p>
                 <form action="/delete_message" method="post">
-                  <input type="hidden" value="{{ channel.id }}" name="channel_id" />
+                  <input type="hidden" value="{{ channel.CHANNEL_ID }}" name="channelId" />
                   <button
                     class="delete-message-btn"
-                    name="message_id"
-                    value="{{ message.id }}"
+                    name="messageId"
+                    value="{{ message.MESSAGE_ID }}"
                   >削除</button>
                 </form>
               </div>
             {% else %}
               <!--DBからメッセージを取得しチャットに表示する-->
               <div class="messages">
-                <p class="user-name">{{ message.user_name }}</p>
-                <p class="box box-left">{{ message.message }}</p>
+                <p class="user-name">{{ message.USER_NAME }}</p>
+                <p class="box box-left">{{ message.MESSAGE }}</p>
               </div>
             {% endif %}
           {% endfor %}
@@ -43,7 +43,7 @@
       <div class="typing-box-wrapper">
         <form class="typing-box" action="/message" method="post">
           <textarea name="message" id="message" autofocus></textarea>
-          <input type="hidden" name="channel_id" value="{{ channel.id }}">
+          <input type="hidden" name="channelId" value="{{ channel.CHANNEL_ID }}">
           <button type="submit" id="add-message-btn">投稿</button>
         </form>
       </div>
@@ -55,7 +55,7 @@
   テンプレートで使用しているJinja2の構文を利用。-->
   <script type="text/javascript">
     const channel = JSON.parse('{{ channel|tojson }}');
-    const uid = JSON.parse('{{ uid|tojson }}');
+    const userId = JSON.parse('{{ userId|tojson }}');
   </script>
   <!--JSで画面がスクロールする-->
   <script

@@ -1,11 +1,12 @@
-from flask import Flask, request, redirect, render_template, session, flash
-from flask_bcrypt import Bcrypt
-from models import dbConnect
-from datetime import timedelta
+import re
 import secrets
 import uuid
-import re
+from datetime import timedelta
 
+from flask import Flask, flash, redirect, render_template, request, session
+from flask_bcrypt import Bcrypt
+
+from models import dbConnect
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -27,24 +28,24 @@ def userSignup():
     # カウンタ（フォームで入力された４項目の妥当性をチェックする）
     counter = 4
     # 正規表現
-    email_pattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-    password_pattern = "\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,32}\Z"
+    emailPattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+    passwordPattern = "\A(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,32}\Z"
 
     # フォームで入力された情報の取得
-    name = request.form.get('name')
+    userName = request.form.get('userName')
     email = request.form.get('email')
     password = request.form.get('password')
-    confirm_password = request.form.get('confirm_password')
+    confirmPassword = request.form.get('confirmPassword')
 
     # データベースからユーザー名でユーザーを取得
-    userByName = dbConnect.getUserByName(name)
+    userByUserName = dbConnect.getUserByUserName(userName)
     # データベースからメールアドレスでユーザーを取得
     userByEmail = dbConnect.getUserByEmail(email)
 
     # ユーザー名の妥当性をチェック
-    if name == "":
+    if userName == "":
         flash('ユーザー名を入力してください')
-    elif userByName != None:
+    elif userByUserName != None:
         flash('すでに使用されているユーザー名です')
     else:
         counter -= 1
@@ -53,7 +54,7 @@ def userSignup():
     # メールアドレスの妥当性をチェック
     if email == "":
         flash('メールアドレスを入力してください')
-    elif re.match(email_pattern, email) is None:
+    elif re.match(emailPattern, email) is None:
         flash('メールアドレスを適切な形式で入力してください')
     elif userByEmail != None:
         flash('すでに使用されているメールアドレスです')
@@ -63,15 +64,15 @@ def userSignup():
     # パスワードの妥当性をチェック
     if password == "":
         flash('パスワードを入力してください')
-    elif re.match(password_pattern, password) is None:
+    elif re.match(passwordPattern, password) is None:
         flash('パスワードは8文字以上32文字以内で、半角英小文字、大文字、数字をそれぞれ1つずつ含めてください')
     else:
         counter -=1
 
     # パスワード（確認用）の妥当性をチェック
-    if confirm_password == "":
+    if confirmPassword == "":
         flash('パスワード（確認用）を入力してください')
-    elif password != confirm_password:
+    elif password != confirmPassword:
         flash('パスワードが一致していません')
     else:
         counter -= 1
@@ -79,13 +80,13 @@ def userSignup():
     # ４項目のチェック項目に合格
     if counter == 0:
         # ユーザーidの生成
-        uid = str(uuid.uuid4())
+        userId = str(uuid.uuid4())
         # パスワードの暗号化
         encryptionPassword = bcrypt.generate_password_hash(password).decode('utf-8')
         # データベースにユーザーを登録
-        dbConnect.createUser(uid, name, email, encryptionPassword)
+        dbConnect.createUser(userId, userName, email, encryptionPassword)
         # セッションの確立
-        session['uid'] = uid
+        session['userId'] = userId
         return redirect('/')
 
     return redirect('/signup')
@@ -114,11 +115,12 @@ def userLogin():
             flash('パスワードを入力してください')
     elif user is None:
         flash('メールアドレスかパスワードが間違っています')
-    elif not bcrypt.check_password_hash(user['password'], password):
+    elif not bcrypt.check_password_hash(user['PASSWORD'], password):
         flash('メールアドレスかパスワードが間違っています')
     else:
         # セッションの確立
-        session['uid'] = user['uid']
+        session['userId'] = user['USER_ID']
+        print(session['userId'])
         return redirect('/')
 
     return redirect('/login')
@@ -131,141 +133,141 @@ def logout():
     return redirect('/login')
 
 
-# メッセージ一覧機能
-@app.route('/detail/<cid>')
-def detail(cid):
-    uid = session.get('uid')
-    # もしuidが空だったらログインページにリダイレクト
-    if uid is None:
+@app.route('/')
+def index():
+    userId = session.get("userId")
+    if userId is None:
         return redirect('/login')
 
-    cid = cid
-    # データベースからチャンネルを取得する
-    channel = dbConnect.getChannelById(cid)
-    # データベースから全てのメッセージを取得する
-    messages = dbConnect.getMessageAll(cid)
+    #全チャンネル情報を取得
+    channels = dbConnect.getChannelAll()
+    return render_template('index.html', channels=channels, userId=userId)
 
-    return render_template('detail.html', messages=messages, channel=channel, uid=uid)
+
+#チャンネルの追加
+@app.route('/', methods=['POST'])
+def add_channel():
+    userId = session.get('userId')
+    if userId is None:
+        return redirect('/login')
+
+    #画面からチャンネル名を取得
+    channelName = request.form.get('channelName')
+
+    channel = dbConnect.getChannelByName(channelName)
+    #チャンネル名がデータベース上に存在する場合
+    if channel != None:
+        flash('既に同じチャンネルが存在しています')
+    else:
+        #画面からチャンネル説明を取得
+        channelDescription = request.form.get('channelDescription')
+        #画面から取得した情報をもとに、チャンネル情報を追加する
+        dbConnect.addChannel(userId, channelName, channelDescription)
+        return redirect('/')
+
+    return redirect('/')
+
+
+#チャンネル情報の更新
+@app.route('/update_channel', methods=['POST'])
+def update_channel():
+    userId = session.get("userId")
+    if userId is None:
+        return redirect('/login')
+
+    #画面からチャンネル情報を取得
+    channelId = request.form.get('channelId')
+    channelName = request.form.get('channelName')
+    channelDescription = request.form.get('channelDescription')
+
+    #チャンネル情報を更新し格納
+    dbConnect.updateChannel(userId, channelName, channelDescription, channelId)
+    channel = dbConnect.getChannelById(channelId)
+    messages = dbConnect.getMessageAll(channelId)
+    return render_template('detail.html', messages=messages, channel=channel, userId=userId)
+
+
+@app.route('/delete/<channelId>')
+def delete_channel(channelId):
+    userId = session.get("userId")
+    if userId is None:
+        return redirect('/login')
+
+    channel = dbConnect.getChannelById(channelId)
+
+    if channel["USER_ID"] == userId:
+        dbConnect.deleteChannel(channelId)
+        channels = dbConnect.getChannelAll()
+        return render_template('index.html', channels=channels, userId=userId)
+
+    return redirect('/')
+
+
+# メッセージ一覧機能
+@app.route('/detail/<channelId>')
+def detail(channelId):
+    userId = session.get('userId')
+    # もしuidが空だったらログインページにリダイレクト
+    if userId is None:
+        return redirect('/login')
+
+    channelId = channelId
+    # データベースからチャンネルを取得する
+    channel = dbConnect.getChannelById(channelId)
+    # データベースから全てのメッセージを取得する
+    messages = dbConnect.getMessageAll(channelId)
+
+    return render_template('detail.html', messages=messages, channel=channel, userId=userId)
 
 
 # メッセージ作成機能
 # /messageにアクセスされPOSTメソッドでデータが送信された場合の処理
 @app.route('/message', methods=['POST'])
 def add_message():
-    uid = session.get('uid')
+    userId = session.get('userId')
     # もしuidが空だったらログインページにリダイレクト
-    if uid is None:
+    if userId is None:
         return redirect('/login')
 
     # messageとchannel_idをリクエスト
     message = request.form.get('message')
-    channel_id = request.form.get('channel_id')
+    channelId = request.form.get('channelId')
 
     # 入力されたメッセージが空でなければデータベースを操作しメッセージを作成する
     if message:
-        dbConnect.createMessage(uid, channel_id, message)
+        dbConnect.createMessage(userId, channelId, message)
 
     # データベースからチャンネルを取得する
-    channel = dbConnect.getChannelById(channel_id)
+    channel = dbConnect.getChannelById(channelId)
     # データベースから全てのメッセージを取得する
-    messages = dbConnect.getMessageAll(channel_id)
+    messages = dbConnect.getMessageAll(channelId)
 
-    return render_template('detail.html', messages=messages, channel=channel, uid=uid)
+    return render_template('detail.html', messages=messages, channel=channel, userId=userId)
 
 
 # メッセージ削除機能
 # /deletemessageにアクセスされPOSTメソッドでデータが送信された場合の処理
 @app.route('/delete_message', methods=['POST'])
 def delete_message():
-    uid = session.get('uid')
+    userId = session.get('userId')
     #もしuidが空だったらログインページにリダイレクト
-    if uid is None:
+    if userId is None:
         return redirect('/login')
 
     # message_idとchannel_idをリクエスト
-    message_id = request.form.get('message_id')
-    cid = request.form.get('channel_id')
+    messageId = request.form.get('messageId')
+    channelId = request.form.get('channelId')
 
-    if message_id:
-        dbConnect.deleteMessage(message_id)
+    if messageId:
+        dbConnect.deleteMessage(messageId)
 
     # データベースからチャンネルを取得する
-    channel = dbConnect.getChannelById(cid)
+    channel = dbConnect.getChannelById(channelId)
     # データベースから全てのメッセージを取得する
-    messages = dbConnect.getMessageAll(cid)
+    messages = dbConnect.getMessageAll(channelId)
 
-    return render_template('detail.html', messages=messages, channel=channel, uid=uid)
+    return render_template('detail.html', messages=messages, channel=channel, userId=userId)
 
-
-#チャンネルを作成する
-@app.route('/')
-def index():
-    uid = session.get("uid")
-    if uid is None:
-        return redirect('/login')
-    else:
-        #全チャンネル情報を取得
-        channels = dbConnect.getChannelAll()
-    return render_template('index.html', channels=channels, uid=uid)
-
-
-#チャンネルの追加
-@app.route('/', methods=['POST'])
-def add_channel():
-    uid = session.get('uid')
-    print(uid)
-    if uid is None:
-        return redirect('/login')
-    #画面からチャンネル名を取得
-    channel_name = request.form.get('channel-title')
-    channel = dbConnect.getChannelByName(channel_name)
-    #チャンネル名がデータベース上に存在する場合
-    if channel == None:
-        #画面からチャンネル説明を取得
-        channel_description = request.form.get('channel-description')
-        #画面から取得した情報をもとに、チャンネル情報をインサート
-        dbConnect.addChannel(uid, channel_name, channel_description)
-        return redirect('/')
-    #上記以外の場合
-    else:
-        error = '既に同じチャンネルが存在しています'
-        return render_template('error/error.html', error_message=error)
-
-
-#チャンネル情報の更新
-@app.route('/update_channel', methods=['POST'])
-def update_channel():
-    uid = session.get("uid")
-    if uid is None:
-        return redirect('/login')
-    #画面からチャンネル情報を取得
-    cid = request.form.get('cid')
-    channel_name = request.form.get('channel-title')
-    channel_description = request.form.get('channel-description')
-    #チャンネル情報を更新し格納
-    res = dbConnect.updateChannel(uid, channel_name, channel_description, cid)
-    channel = dbConnect.getChannelById(cid)
-    messages = dbConnect.getMessageAll(cid)
-    return render_template('detail.html', messages=messages, channel=channel, uid=uid)
-
-
-@app.route('/delete/<cid>')
-def delete_channel(cid):
-    uid = session.get("uid")
-    print(uid)
-    if uid is None:
-        return redirect('/login')
-    else:
-        channel = dbConnect.getChannelById(cid)
-        print(channel["uid"] == uid)
-        if channel["uid"] != uid:
-            flash('チャンネルは作成者のみ削除可能です')
-            return redirect ('/')
-        else:
-            dbConnect.deleteChannel(cid)
-            channels = dbConnect.getChannelAll()
-            return render_template('index.html', channels=channels, uid=uid)
-        
 
 if __name__ == "__main__":
     app.run(port=8080, debug=True)
