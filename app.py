@@ -71,7 +71,7 @@ def userSignup():
 
     # パスワード（確認用）の妥当性をチェック
     if confirmPassword == "":
-        flash('パスワード（確認用）を入力してください')
+        flash('パスワード（確認）を入力してください')
     elif password != confirmPassword:
         flash('パスワードが一致していません')
     else:
