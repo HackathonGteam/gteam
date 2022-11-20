@@ -17,13 +17,13 @@
             <!--POSTで/signupにユーザー情報を送信する-->
             <form method="post" action="/signup">
               <p>ユーザーネーム</p>
-              <input type="text" name="name">
+              <input type="text" name="userName">
               <p>メールアドレス</p>
               <input type="text" name="email">
               <p>パスワード</p>
               <input type="password" name="password">
               <p>パスワード（確認）</p>
-              <input type="password" name="confirm_password">
+              <input type="password" name="confirmPassword">
               <button>SIGN UP</button>
             </form>
             <a class="registration-switch" href="{{ url_for('login') }}">LOG IN</a>
