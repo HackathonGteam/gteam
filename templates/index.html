@@ -6,7 +6,7 @@
   <div class="header channel-header">
     <div class="container">
       <div class="channel-top">
-        <h1>チャンネル一覧</h1>
+        <h1>MOSS Chat</h1>
       </div>
     </div>
   </div>
@@ -14,21 +14,39 @@
     <div class="container">
       <div class="add-channel">
         <div class="add-channel-top">
-          <h3>チャンネル追加</h3>
+          <h3>新しいチャンネルを作る</h3>
         </div>
         <div class="add-channel-main">
-          <form class="add-channel-form" action="/" method="post">
-            <input type="text" placeholder="チャンネル名" class="channel-name" name="channelName">
-            <input type="text" placeholder="チャンネルの説明" class="channel-description" name="channelDescription">
-            <button>追加</button>
+          <form class="add-channel channel-box" action="/" method="post">
+            <input type="text" placeholder="チャンネル名" class="channel-name channel-item" name="channelName">
+            <input type="text" placeholder="チャンネルの説明" class="channel-description channel-item" name="channelDescription">
+            <button class="channel-button channel-item">作成</button>
           </form>
         </div>
       </div>
       <div class="channel-list">
         <div class="channel-pagination-block">
           {% for channel in channels %}
-            <li>
-              <a href="{{ url_for('detail', channelId=channel.CHANNEL_ID) }}">{{ channel.CHANNEL_NAME }}</a>
+            <li class="display-channel channel-box">
+              <a class="channel-name channel-item" href="{{ url_for('detail', channelId=channel.CHANNEL_ID) }}">
+                {{ channel.CHANNEL_NAME }} >>
+              </a>
+              <span class="channel-description channel-item">
+                {{ channel.ABSTRACT }}
+              </span>
+              {% if userId == channel.USER_ID %}
+                <div class="channel-right">
+                    <div class="delete-button">
+                      <button class="channel-button channel-item"><a href="{{ url_for('delete_channel', channelId=channel.CHANNEL_ID) }}">
+                        削除
+                      </a></button>
+                    </div>
+                </div>
+              {% else %}
+                <span class="channel-right channel-item">
+                  ユーザーネーム
+                </span>
+              {% endif %}
             </li>
           {% endfor %}
         </div>

@@ -1,6 +1,6 @@
 @import 'registration.css';
-@import 'pagination.css';
 @import 'channel.css';
+@import 'pagination.css';
 
 /* ページ共通レイアウト */
 body {
