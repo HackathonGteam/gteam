@@ -202,15 +202,40 @@ def delete_channel(channelId):
 
     return redirect('/')
 
+# 同意機能
+@app.route('/agreement', methods=['POST'])
+def userAgreement():
+    # フォームで入力された情報の取得
+    agreement = request.form.get('agreement')
+    channelId = request.form.get('channelId')
+    #ユーザIDのチェック
+    userId = session.get('userId')
+    if userId is None:
+        return redirect('/login')
+    #同意がなかったらルートにはじく
+    if agreement!=1:
+        return render_template('agreement.html',channelId=channelId)
+    session['agreemnt'] =agreement 
+    #detailに帰す
+    channelId = channelId
+    # データベースからチャンネルを取得する
+    channel = dbConnect.getChannelById(channelId)
+    # データベースから全てのメッセージを取得する
+    messages = dbConnect.getMessageAll(channelId)
+    return render_template('detail.html', messages=messages, channel=channel, userId=userId)
+
 
 # メッセージ一覧機能
 @app.route('/detail/<channelId>')
 def detail(channelId):
     userId = session.get('userId')
+    agreement=session.get('agreement')
     # もしuidが空だったらログインページにリダイレクト
     if userId is None:
         return redirect('/login')
-
+    #もしagreementが空だったらagreementにリダイレクト
+    if agreement is None:
+        return render_template('agreement.html',channelId = channelId)
     channelId = channelId
     # データベースからチャンネルを取得する
     channel = dbConnect.getChannelById(channelId)
