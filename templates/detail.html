@@ -49,10 +49,10 @@
       </div>
     </div>
   </div>
-  <!-- jsの読み込み -->
-  <script src="{{url_for('static',filename='js/alert-message.js')}}"></script>
 {% endblock %}
 {% block script %}
+  <!-- jsの読み込み -->
+  <script src="{{url_for('static',filename='js/alert-message.js')}}"></script>
   <!--pythonのFlaskからJSON形式でJSファイルに変数を渡す。
   テンプレートで使用しているJinja2の構文を利用。-->
   <script type="text/javascript">
