@@ -3,22 +3,31 @@
   <title>home</title>
 {% endblock %}
 {% block body %}
-  <div class="channel-wrapper">
+  <div class="header channel-header">
     <div class="container">
       <div class="channel-top">
         <h1>チャンネル一覧</h1>
-        <p>チャンネルを追加</p>
-        <!-- formタグでチャンネル追加を実装 -->
-        <form action="/" method="post">
-          <!--チャンネル名の追加-->
-          <input type="text" placeholder="チャンネル名" class="" name="channelName">
-          <!--チャンネルの説明-->
-          <input type="text" placeholder="チャンネル説明" class="" name="channelDescription">
-          <button>追加</button>
-        </form>
+      </div>
+    </div>
+  </div>
+  <div class="channel-wrapper">
+    <div class="container">
+      <div class="add-channel">
+        <div class="add-channel-top">
+          <h3>チャンネル追加</h3>
+        </div>
+        <div class="add-channel-main">
+          <!-- formタグでチャンネル追加を実装 -->
+          <form class="add-channel-form" action="/" method="post">
+            <!--チャンネル名の追加-->
+            <input type="text" placeholder="チャンネル名" class="channel-name" name="channelName">
+            <!--チャンネルの説明-->
+            <input type="text" placeholder="チャンネルの説明" class="channel-description" name="channelDescription">
+            <button>追加</button>
+          </form>
+        </div>
       </div>
       <div class="channel-list">
-        <h3>チャンネルリスト</h3>
         <!-- pythonのfor文を使用し、チャンネルリストにチャンネル名を表示する。 -->
         <div class="channel-pagination-block">
           {% for channel in channels %}

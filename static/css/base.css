@@ -1,10 +1,15 @@
 @import 'registration.css';
 @import 'pagination.css';
+@import 'channel.css';
 
 /* ページ共通レイアウト */
 body {
   margin: 0 auto;
   font-family: "Mplus 1c", sans-serif;
+}
+
+.header {
+  height: 80px;
 }
 
 .container {

@@ -1,0 +1,73 @@
+.channel-header {
+  background-image: url("../img/channel-header.png");
+  background-size: cover;
+}
+
+.channel-top h1 {
+  text-align: center;
+  line-height: 80px;
+  margin: 0;
+  color: #fff;
+}
+
+.add-channel {
+  padding: 30px 0;
+}
+
+.add-channel-top {
+  margin: 0 auto;
+  margin-bottom: 35px;
+  width: 500px;
+  padding: 10px;
+  background-color: #DCDCDC;
+  border-radius: 75px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+}
+
+.add-channel-top h3 {
+  text-align: center;
+  margin: 0;
+}
+
+.add-channel-form {
+  text-align: center;
+}
+
+.add-channel-form input {
+  height: 25px;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.channel-name {
+  width: 220px;
+}
+
+.channel-description {
+  width: 500px;
+}
+
+.add-channel button {
+  width: 150px;
+  height: 31px;
+  border: 0;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #006400;
+}
+
+.add-channel button:hover {
+  color: #000;
+  background-color: #60B500;
+}
+
+.channel-pagination-block li {
+  list-style: none;
+}
+
+.channel-pagination-block a {
+  color: #000;
+  text-decoration: none;
+}
