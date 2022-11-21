@@ -213,9 +213,9 @@ def userAgreement():
     if userId is None:
         return redirect('/login')
     #同意がなかったらルートにはじく
-    if agreement!=1:
+    if agreement!="1":
         return render_template('agreement.html',channelId=channelId)
-    session['agreemnt'] =agreement 
+    session['agreement'] =agreement 
     #detailに帰す
     channelId = channelId
     # データベースからチャンネルを取得する

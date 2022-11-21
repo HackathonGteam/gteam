@@ -1,1 +1,7 @@
-<input type="checkbox" id="ck1" name="agreement" value="1">
+<h1>チェックボックスにいれてください</h1>
+<form action="/agreement" method="POST">
+  <label for="ck1">checkbox</label>
+  <input type="checkbox" id="ck1" name="agreement" value="1">
+  <input type="hidden" value="{{ channelId }}" name="channelId" >
+  <button>送信</button>
+</form>
