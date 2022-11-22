@@ -115,6 +115,13 @@
   background-color: rgb(105, 105, 105, 0.8);
 }
 
+/* チャンネルのユーザー */
+
+.channel-user p{
+  text-align: center;
+  margin: 0;
+}
+
 /* チャンネルリストのテキストスタイル */
 
 .channel-list {

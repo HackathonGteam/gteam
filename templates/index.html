@@ -44,9 +44,9 @@
                     </div>
                 </div>
               {% else %}
-                <span class="channel-right channel-item">
-                  ユーザーネーム
-                </span>
+                <div class="channel-right channel-item channel-user">
+                    <p>by {{ channel.USER_NAME }}</p>
+                </div>
               {% endif %}
             </li>
           {% endfor %}
