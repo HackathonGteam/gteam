@@ -197,8 +197,7 @@ def delete_channel(channelId):
 
     if channel["USER_ID"] == userId:
         dbConnect.deleteChannel(channelId)
-        channels = dbConnect.getChannelAll()
-        return render_template('index.html', channels=channels, userId=userId)
+        return redirect('/')
 
     return redirect('/')
 
