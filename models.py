@@ -55,7 +55,7 @@ class dbConnect:
             conn = DB.getConnection()
             cur = conn.cursor()
             #全チャンネルを取得
-            sql = "SELECT * FROM CHANNELS;"
+            sql = "SELECT CHANNEL_ID, U.USER_ID, USER_NAME, CHANNEL_NAME, ABSTRACT FROM CHANNELS AS C INNER JOIN USERS AS U ON C.USER_ID = U.USER_ID ORDER BY CHANNEL_ID DESC;"
             cur.execute(sql)
             channels = cur.fetchall()
             return channels
