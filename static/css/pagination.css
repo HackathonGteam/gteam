@@ -22,10 +22,10 @@
 
 .pagination a:hover {
   color: #fff;
-  background-color: rgba(0, 100, 0, 0.8);
+  background-color: rgba(96, 181, 0, 0.8);
 }
 
 .active a {
   color: #fff;
-  background-color: rgba(0, 100, 0);
+  background-color: rgba(96, 181, 0, 1);
 }

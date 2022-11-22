@@ -6,6 +6,7 @@
 body {
   margin: 0 auto;
   font-family: "Mplus 1c", sans-serif;
+  background-color: rgba(255, 240, 245, 0.3);
 }
 
 .header {

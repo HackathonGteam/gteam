@@ -1,6 +1,11 @@
 /* ヘッダー */
 .channel-header {
-  background-color: #006400;
+  background-color: #FFD000;
+}
+
+.header-bottom {
+  height: 10px;
+  background-color: #DAA520;
 }
 
 .channel-top h1 {
@@ -84,12 +89,12 @@
 
 .add-channel button {
   color: #fff;
-  background-color: rgba(0, 100, 0);
+  background-color: rgba(96, 181, 0, 1);
 }
 
 .add-channel button:hover {
   color: #fff;
-  background-color: rgba(0, 100, 0, 0.8);
+  background-color: rgba(96, 181, 0, 0.8);
 }
 
 /* チャンネル削除ボタン */
@@ -137,7 +142,7 @@
 
 .channel-list .channel-name:hover {
   font-weight: bold;
-  color: #006400;
+  color: #60B500;
 }
 
 .channel-list .channel-name::after {
@@ -147,7 +152,7 @@
   content: '';
   width: 100%;
   height: 2px;
-  background: #006400;
+  background: #60B500;
   transform: scale(0, 1);
   transform-origin: left top;
   transition: transform .3s;
