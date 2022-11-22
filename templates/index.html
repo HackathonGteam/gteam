@@ -5,12 +5,25 @@
 {% block body %}
   <div class="header channel-header">
     <div class="container">
-      <div class="channel-top">
-        <h1>MOSS Chat</h1>
+      <div class="header-contents">
+        <div class="header-left channel-header-left">
+          <img src="static/img/chat-dog.png" alt="">
+        </div>
+        <div class="header-center channel-header-center">
+          <h1>MOSS Chat</h1>
+        </div>
+        <div class="header-right channel-header-right">
+          <a href="{{ url_for('index') }}">
+            <i class="header-icon fa-solid fa-house"></i>
+          </a>
+          <a href="{{ url_for('logout') }}">
+            <i class="header-icon fa-solid fa-right-from-bracket"></i>
+          </a>
+        </div>
       </div>
     </div>
   </div>
-  <div class="header-bottom"></div>
+  <div class="header-bottom channel-header-bottom"></div>
   <div class="channel-wrapper">
     <div class="container">
       <div class="add-channel">
@@ -30,7 +43,8 @@
           {% for channel in channels %}
             <li class="display-channel channel-box">
               <a class="channel-name channel-item" href="{{ url_for('detail', channelId=channel.CHANNEL_ID) }}">
-                {{ channel.CHANNEL_NAME }} >>
+                {{ channel.CHANNEL_NAME }}
+                <i class="mouse-icon fa-solid fa-computer-mouse"></i>
               </a>
               <span class="channel-description channel-item">
                 {{ channel.ABSTRACT }}
@@ -45,7 +59,7 @@
                 </div>
               {% else %}
                 <div class="channel-right channel-item channel-user">
-                    <p>by {{ channel.USER_NAME }}</p>
+                    <p>{{ channel.USER_NAME }}</p>
                 </div>
               {% endif %}
             </li>

@@ -9,8 +9,56 @@ body {
   background-color: rgba(255, 240, 245, 0.3);
 }
 
+a {
+  text-decoration: none;
+  color: #000;
+}
+
 .header {
   height: 80px;
+}
+
+.header-contents {
+  display: flex;
+  justify-content: space-around;
+}
+
+.header-left {
+  width: 200px;
+}
+
+.header-left img {
+  padding: 5px 65px;
+  width: 70px;
+  height: 70px;
+}
+
+.header-right {
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+}
+
+.header-icon {
+  padding: 15px 0;
+  font-size: 50px;
+}
+
+.header-icon:hover {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.header-bottom {
+  height: 10px;
+}
+
+.header-center h1 {
+  margin: 0;
+  font-size: 40px;
+  line-height: 80px;
+  text-align: center;
+  letter-spacing: 5px;
+  color: #fff;
 }
 
 .container {

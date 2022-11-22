@@ -3,17 +3,8 @@
   background-color: #FFD000;
 }
 
-.header-bottom {
-  height: 10px;
+.channel-header-bottom {
   background-color: #DAA520;
-}
-
-.channel-top h1 {
-  text-align: center;
-  letter-spacing: 5px;
-  line-height: 80px;
-  margin: 0;
-  color: #fff;
 }
 
 /* チャンネル追加 */
@@ -132,8 +123,9 @@
   list-style: none;
 }
 
-.channel-list a {
-  text-decoration: none;
+.channel-list .channel-name {
+  text-decoration: underline;
+  text-underline-offset: 5px;
   color: #000;
 }
 
@@ -141,18 +133,22 @@
   margin: 20px 0;
 }
 
+.mouse-icon {
+  margin-left: 10px;
+}
+
 /* チャンネル名にカーソルを当てた時 */
 
-.channel-list .channel-name {
+/* .channel-list .channel-name {
   position: relative;
-}
+} */
 
 .channel-list .channel-name:hover {
   font-weight: bold;
-  color: #60B500;
+  color: #006400;
 }
 
-.channel-list .channel-name::after {
+/* .channel-list .channel-name::after {
   position: absolute;
   bottom: -4px;
   left: 0;
@@ -167,7 +163,7 @@
 
 .channel-list .channel-name:hover::after {
   transform: scale(1, 1);
-}
+} */
 
 /* チャンネルリストの背景色 */
 
