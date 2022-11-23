@@ -1,7 +1,27 @@
-<h1>チェックボックスにいれてください</h1>
-<form action="/agreement" method="POST">
-  <label for="ck1">checkbox</label>
-  <input type="checkbox" id="ck1" name="agreement" value="1">
-  <input type="hidden" value="{{ channelId }}" name="channelId" >
-  <button>送信</button>
-</form>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Flaskのテンプレートの継承を利用する-->
+    {% block title %}{% endblock %}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/agreement.css')}}">
+</head>
+<body>
+  <div class="outsideagreementimg">
+    <!-- 画像を持ってくる -->
+    <img src="../static/img/agreement.png" class="agreementimg">
+  <div class="checkboxframe">
+    <!-- flaskの/agreementを使う -->
+  <form action="/agreement" method="POST">
+    <!-- チェックボックス -->
+    <input type="checkbox" id="ck1" name="agreement" value="1" class="checkbox">
+    <label for="ck1" class="checkboxmsg">同意する </label>
+    <input type="hidden" value="{{ channelId }}" name="channelId" >
+    <button>送信</button>
+  </form>
+</div>
+</div>
+</body>
+</html>
