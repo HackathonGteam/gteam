@@ -80,7 +80,7 @@
 
 .add-channel button {
   color: white;
-  background-color: var(----color_primary);
+  background-color: var(--color_primary);
 }
 
 .add-channel button:hover {
