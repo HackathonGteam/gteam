@@ -31,11 +31,22 @@
           <h3>新しいチャンネルを作る</h3>
         </div>
         <div class="add-channel-main">
-          <form class="add-channel channel-box" action="/" method="post">
+          <form class="display-add-channel channel-box" action="/" method="post">
             <input type="text" placeholder="チャンネル名" class="channel-name channel-item" name="channelName">
             <input type="text" placeholder="チャンネルの説明" class="channel-description channel-item" name="channelDescription">
             <button class="channel-button channel-item">作成</button>
           </form>
+          <div class="channel-message">
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="channel-feedback">
+                  {% for message in messages %}
+                    <p>{{ message }}</p>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+          </div>
         </div>
       </div>
       <div class="channel-list">

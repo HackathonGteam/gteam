@@ -99,14 +99,13 @@
 .registration-message{
   padding-top: 80px;
   width: 358px;
-  color: #ff0000;
+  color: red;
   font-weight: bold;
 }
 
-.feedback {
+.registration-feedback {
   padding: 0 10px;
-  background-color: #fff;
-  border: dashed #ff0000;
+  border: dashed red;
 }
 
 .registration-message img {
