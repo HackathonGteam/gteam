@@ -1,49 +1,88 @@
-{% extends 'base.html' %}<!-- base.htmlを継承して利用する -->
+{% extends 'base.html' %}
 {% block title %}
-    <title>home</title>
+  <title>home</title>
 {% endblock %}
 {% block body %}
-  <div class="main-container channelpage">
-    <div class="main-content">
-      <div class="channel-title">
-        <h1>チャンネル一覧</h1>
-        <p>チャンネルを追加</p>
-        <!--formタグでチャンネル追加を実装(classはsampleより引用)
-        action属性はまだ確認中-->
-        <form id="add-channel" action="/" method="post">
-          <!--チャンネル名の追加-->
-          <input 
-          type="text"
-          placeholder="チャンネル名"
-          class="channel-form-input"
-          name="channelName"
-          />
-          <!--チャンネルの説明-->
-          <input
-          type="text"
-          placeholder="チャンネル説明"
-          class="channel-form-input"
-          name="channelDescription"
-          />
-          <button id="add-channel-confirmation-btn">登録</button>
-        </form>
+  <div class="header channel-header">
+    <div class="container">
+      <div class="header-contents">
+        <div class="header-left channel-header-left">
+          <img src="static/img/chat-dog.png" alt="">
+        </div>
+        <div class="header-center channel-header-center">
+          <h1>MOSS Chat</h1>
+        </div>
+        <div class="header-right channel-header-right">
+          <a href="{{ url_for('index') }}">
+            <i class="header-icon fa-solid fa-house"></i>
+          </a>
+          <a href="{{ url_for('logout') }}">
+            <i class="header-icon fa-solid fa-right-from-bracket"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-bottom channel-header-bottom"></div>
+  <div class="channel-wrapper">
+    <div class="container">
+      <div class="add-channel">
+        <div class="add-channel-top">
+          <h3>新しいチャンネルを作る</h3>
+        </div>
+        <div class="add-channel-main">
+          <form class="display-add-channel channel-box" action="/" method="post">
+            <input type="text" placeholder="チャンネル名" class="channel-name channel-item" name="channelName">
+            <input type="text" placeholder="チャンネルの説明" class="channel-description channel-item" name="channelDescription">
+            <button class="channel-button channel-item">作成</button>
+          </form>
+          <div class="channel-message">
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="channel-feedback">
+                  {% for message in messages %}
+                    <p>{{ message }}</p>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+          </div>
+        </div>
       </div>
       <div class="channel-list">
-        <h3>チャンネルリスト</h3>
-          <!--pythonのfor文を使用し、チャンネルリストにチャンネル名を表示する。
-          channel-listとchannel-nameはsampleより引用-->
+        <div class="channel-pagination-block">
           {% for channel in channels %}
-            <li>
-              <a href="{{ url_for('detail', channelId=channel.CHANNEL_ID) }}">{{ channel.CHANNEL_NAME }}</a>
+            <li class="display-channel channel-box">
+              <a class="channel-name channel-item" href="{{ url_for('detail', channelId=channel.CHANNEL_ID) }}">
+                {{ channel.CHANNEL_NAME }}
+                <i class="mouse-icon fa-solid fa-computer-mouse"></i>
+              </a>
+              <span class="channel-description channel-item">
+                {{ channel.ABSTRACT }}
+              </span>
+              {% if userId == channel.USER_ID %}
+                <div class="channel-right">
+                    <div class="delete-button">
+                      <button class="channel-button channel-item"><a href="{{ url_for('delete_channel', channelId=channel.CHANNEL_ID) }}">
+                        削除
+                      </a></button>
+                    </div>
+                </div>
+              {% else %}
+                <div class="channel-right channel-item channel-user">
+                    <p>{{ channel.USER_NAME }}</p>
+                </div>
+              {% endif %}
             </li>
           {% endfor %}
+        </div>
       </div>
     </div>
   </div>
 {% endblock %}
 {% block script %}
-  <script type="text/javascript">
-    const channels = JSON.parse('{{ channels|tojson }}')
-    const userId = JSON.parse('{{ userId|tojson }}');
-  </script>
+  <script
+    src="{{ url_for('static', filename='js/pagination.js') }}"
+    type="text/javascript"
+  ></script>
 {% endblock %}

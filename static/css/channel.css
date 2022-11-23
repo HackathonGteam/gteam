@@ -1,0 +1,175 @@
+/* ヘッダー */
+
+.channel-header {
+  background-color: var(--header_color_primary);
+}
+
+.channel-header-bottom {
+  background-color: var(--header_color_secondary);
+}
+
+/* チャンネル追加 */
+
+.add-channel {
+  height: 160px;
+  padding: 30px 0 15px 0;
+}
+
+.add-channel-top {
+  width: 500px;
+  padding: 10px;
+  margin: 10px auto 0 auto;
+  border-radius: 75px;
+  background-color: var(--title_back_color);
+}
+
+.add-channel-top h3 {
+  letter-spacing: 3px;
+  text-align: center;
+  margin: 0;
+}
+
+.add-channel-main {
+  padding-top: 20px;
+}
+
+.add-channel button:hover {
+  color: black;
+  background-color: var(----color_primary);
+}
+
+/* 共通部分 */
+/* チャンネル追加の装飾 */
+/* チャンネルリストの装飾 */
+
+.channel-box {
+  display: flex;
+  justify-content: space-between;
+  width: 900px;
+  margin: 0 auto;
+}
+
+.channel-item {
+  display: inline-block;
+}
+
+.channel-name {
+  width: 228px;
+}
+
+.channel-description {
+  width: 508px;
+}
+
+.channel-button {
+  font-size: 20px;
+  font-weight: bold;
+  width: 80px;
+  height: 30px;
+  border: 0;
+  border-radius: 20px;
+}
+
+.channel-right {
+  width: 150px;
+}
+
+/* チャンネル追加のボックス */
+
+.add-channel input {
+  height: 25px;
+  font-size: 20px;
+}
+
+/* チャンネル追加のボタン */
+
+.add-channel button {
+  color: white;
+  background-color: var(--color_primary);
+}
+
+.add-channel button:hover {
+  color: white;
+  background-color: var(--color_primary_alpha);
+}
+
+/* チャンネル削除ボタン */
+
+.delete-button {
+  text-align: center;
+}
+
+.display-channel button a {
+  color: white;
+}
+
+.display-channel button {
+  background-color: var(--button_color);
+}
+
+.display-channel button:hover {
+  background-color: var(--button_color_alpha);
+}
+
+/* チャンネル作成のフィードバック */
+
+.channel-message {
+  height: 40px;
+  width: 900px;
+  margin: 0 auto;
+}
+
+.channel-feedback {
+  margin: 10px 0;
+  border: dashed red;
+  padding: 8px 10px;
+}
+
+.channel-feedback p {
+  color: red;
+  margin: 0;
+}
+
+/* チャンネルのユーザー */
+
+.channel-user p{
+  text-align: center;
+  margin: 0;
+}
+
+/* チャンネルリストのテキストスタイル */
+
+.channel-list {
+  font-size: 20px;
+}
+
+.channel-list .channel-name {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  color: black;
+}
+
+.channel-list .channel-item {
+  margin: 20px 0;
+}
+
+.mouse-icon {
+  margin-left: 10px;
+}
+
+/* チャンネル名にカーソルを当てた時 */
+
+.channel-list .channel-name:hover {
+  font-weight: bold;
+  color: #006400;
+}
+
+/* チャンネルリストの背景色 */
+
+.channel-pagination-block {
+  width: 900px;
+  margin: 0 auto;
+  padding: 0 30px;
+  border-radius: 30px;
+  background-color: var(--channel_background);
+}

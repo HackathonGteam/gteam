@@ -19,7 +19,7 @@ app.permanent_session_lifetime = timedelta(days=30)
 # サインアップページにページ遷移
 @app.route('/signup')
 def signup():
-    return render_template('signup.html')
+    return render_template('signup.html', name="", email="")
 
 
 # サインアップ機能
@@ -45,21 +45,28 @@ def userSignup():
     # ユーザー名の妥当性をチェック
     if userName == "":
         flash('ユーザー名を入力してください')
+        feedback_name = ""
     elif userByUserName != None:
         flash('すでに使用されているユーザー名です')
+        feedback_name = ""
     else:
         counter -= 1
+        feedback_name = userName
 
 
     # メールアドレスの妥当性をチェック
     if email == "":
         flash('メールアドレスを入力してください')
+        feedback_email = ""
     elif re.match(emailPattern, email) is None:
         flash('メールアドレスを適切な形式で入力してください')
+        feedback_email = ""
     elif userByEmail != None:
         flash('すでに使用されているメールアドレスです')
+        feedback_email = ""
     else:
         counter -= 1
+        feedback_email = email
 
     # パスワードの妥当性をチェック
     if password == "":
@@ -89,7 +96,7 @@ def userSignup():
         session['userId'] = userId
         return redirect('/')
 
-    return redirect('/signup')
+    return render_template('signup.html', name=feedback_name, email=feedback_email)
 
 
 # ログインページにページ遷移
@@ -157,7 +164,7 @@ def add_channel():
     channel = dbConnect.getChannelByName(channelName)
     #チャンネル名がデータベース上に存在する場合
     if channel != None:
-        flash('既に同じチャンネルが存在しています')
+        flash('既に同じ名前のチャンネルが存在しています')
     else:
         #画面からチャンネル説明を取得
         channelDescription = request.form.get('channelDescription')
@@ -197,8 +204,7 @@ def delete_channel(channelId):
 
     if channel["USER_ID"] == userId:
         dbConnect.deleteChannel(channelId)
-        channels = dbConnect.getChannelAll()
-        return render_template('index.html', channels=channels, userId=userId)
+        return redirect('/')
 
     return redirect('/')
 
