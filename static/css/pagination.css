@@ -6,8 +6,24 @@
 }
 
 .pagination li {
-  margin: 5px;
-  border: 2px solid black;
+  border: 1px solid var(--color_secondary);
+  border-right: none;
+}
+
+.pagination .next, .pagination .first, .pagination .last, .pagination .pageNumbers{
+  border-right: 1px solid var(--color_secondary);
+}
+
+.pagination .first {
+  margin-right: 10px;
+}
+
+.pagination .last {
+  margin-left: 10px;
+}
+
+.pagination .pageNumbers {
+  margin-left: 20px;
 }
 
 .pagination a {
@@ -15,6 +31,7 @@
   padding: 10px;
   font-size: 12px;
   font-weight: bold;
+  color: var(--color_secondary);
 }
 
 .pagination a:hover {
@@ -25,4 +42,9 @@
 .active a {
   color: white;
   background-color: var(--color_primary);
+}
+
+.pagination .pageNumbers a:hover {
+  color: var(--color_secondary);
+  background-color: white;
 }
