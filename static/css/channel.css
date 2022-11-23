@@ -1,11 +1,11 @@
 /* ヘッダー */
 
 .channel-header {
-  background-color: var(--header_color_primary);
+  background-color: var(--color_primary);
 }
 
 .channel-header-bottom {
-  background-color: var(--header_color_secondary);
+  background-color: var(--color_secondary);
 }
 
 /* チャンネル追加 */
