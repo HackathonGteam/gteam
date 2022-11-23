@@ -9,6 +9,12 @@
         <!--Flaskでヘッダーにチャンネル名を表示-->
         <p id="chatroom-name">{{ channel.CHANNEL_NAME }}</p>
       </div>
+      <!--戻るボタンの配置-->
+      <div>
+        <button class="backToIndex-button channel-item">
+          <a href="{{ url_for('index') }}">チャンネル一覧に戻る</a>
+        </button>
+      </div>
       <!--ここからチャットエリア-->
       <div id="message-area">
         <!--pythonのif文とfor文を使用し、メッセージのエラーをチェックする-->
@@ -41,10 +47,10 @@
       </div>
       <!--入力したメッセージをPOSTで”/message"へ送信-->
       <div class="typing-box-wrapper">
-        <form class="typing-box" action="/message" method="post">
+        <form class="typing-box" action="/message" method="post" name="messageForm">
           <textarea name="message" id="message" autofocus></textarea>
           <input type="hidden" name="channelId" value="{{ channel.CHANNEL_ID }}">
-          <button type="submit" id="add-message-btn">投稿</button>
+          <button type="submit" id="add-message-btn" name="btn" onclick="return alertMessage()">投稿</button>
         </form>
       </div>
     </div>
@@ -62,4 +68,6 @@
     src="{{url_for('static',filename='js/scroll-message.js')}}"
     type="text/javascript"
   ></script>
+  <!-- 禁止ワード -->
+  <script src="{{url_for('static',filename='js/alert-message.js')}}"></script>
 {% endblock %}

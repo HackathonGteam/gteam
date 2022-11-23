@@ -1,0 +1,14 @@
+:root {
+  --color_primary: #60B500;
+  --color_primary_alpha: rgba(96, 181, 0, 0.8);
+  --color_secondary: #006400;
+  --color_secondary_alpha: rgba(0, 100, 0, 0.8);
+
+  --channel_background: rgba(248, 229, 140, 0.5);
+  --title_back_color: #DCDCDC;
+
+  --button_color: #696969;
+  --button_color_alpha: rgb(105, 105, 105, 0.8);
+
+  --blabk_alpha: rgba(0, 0, 0, 0.8);
+}
