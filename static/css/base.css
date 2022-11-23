@@ -16,6 +16,11 @@ li {
 
 .header {
   height: 80px;
+  background-color: var(--color_primary);
+}
+
+.header-bottom {
+  background-color: var(--color_secondary);
 }
 
 .header-contents {
