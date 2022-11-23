@@ -74,6 +74,15 @@
   width: 150px;
 }
 
+.backToIndex-button{
+  font-size: 20px;
+  font-weight: bold;
+  width: 220px;
+  height: 30px;
+  border: 0;
+  border-radius: 20px;
+}
+
 /* チャンネル追加のボックス */
 
 .add-channel input {

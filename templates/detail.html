@@ -9,6 +9,12 @@
         <!--Flaskでヘッダーにチャンネル名を表示-->
         <p id="chatroom-name">{{ channel.CHANNEL_NAME }}</p>
       </div>
+      <!--戻るボタンの配置-->
+      <div>
+        <button class="backToIndex-button channel-item">
+          <a href="{{ url_for('index') }}">チャンネル一覧に戻る</a>
+        </button>
+      </div>
       <!--ここからチャットエリア-->
       <div id="message-area">
         <!--pythonのif文とfor文を使用し、メッセージのエラーをチェックする-->
