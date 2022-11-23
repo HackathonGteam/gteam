@@ -160,10 +160,12 @@ def add_channel():
 
     #画面からチャンネル名を取得
     channelName = request.form.get('channelName')
-
     channel = dbConnect.getChannelByName(channelName)
+    #チャンネル名が空の場合
+    if channelName == "":
+        flash('チャンネル名が空です')
     #チャンネル名がデータベース上に存在する場合
-    if channel != None:
+    elif channel != None:
         flash('既に同じ名前のチャンネルが存在しています')
     else:
         #画面からチャンネル説明を取得
