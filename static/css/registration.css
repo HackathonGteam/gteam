@@ -1,8 +1,4 @@
-.registration-wrapper {
-  height: 100vh;
-  background-image: url("../img/registration.png");
-  background-size: cover;
-}
+/* タイトル */
 
 .registration-top {
   font-size: 30px;
@@ -10,14 +6,18 @@
 
 .registration-top h1 {
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 30px;
-  padding-top: 30px;
+  margin: 20px 0;
 }
 
-.registration-top h1 span{
-  color: #fff;
+.registration-top h1 .MO {
+  color: var(--color_secondary);
 }
+
+.registration-top h1 .SS {
+  color: var(--color_primary);
+}
+
+/* 入力フォーム */
 
 .registration-content {
   display: flex;
@@ -28,6 +28,16 @@
   width: 358px;
 }
 
+.registration-left.signup img {
+  margin: 50px 54px 0 54px;
+  width: 250px;
+}
+
+.registration-left.login img {
+  margin: 30px 89px 0 89px;
+  width: 180px;
+}
+
 .registration-form {
   width: 358px;
 }
@@ -36,20 +46,24 @@
   margin: 0;
   text-align: center;
   font-size: 35px;
-  color: #fff;
 }
 
 .registration-form p {
   margin-bottom: 3px;
-  font-size: 17px;
-  color: #fff;
+  font-size: 15px;
   font-weight: bold;
 }
 
 .registration-form input {
   width: 350px;
-  height: 35px;
+  height: 30px;
   font-size: 17px;
+  border: 2px solid var(--color_secondary);
+}
+
+.registration-form input:focus {
+  border: 2px solid var(--color_primary);
+  outline: 0;
 }
 
 .registration-form button {
@@ -57,13 +71,12 @@
   width: 358px;
   height: 40px;
   padding: 0;
-  margin-top: 40px;
-  margin-bottom: 10px;
+  margin: 40px 0 10px 0;
   border: 0;
   font-size: 20px;
   font-weight: bold;
-  color: #fff;
-  background-color: #00489d;
+  color: white;
+  background-color: var(--color_secondary);
 }
 
 .registration-switch {
@@ -71,7 +84,16 @@
   font-size: 15px;
   font-weight: bold;
   text-align: center;
-  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.display-feedback.signup {
+  height: 250px;
+}
+
+.display-feedback.login {
+  height: 100px;
 }
 
 .registration-message{
@@ -85,4 +107,13 @@
   padding: 0 10px;
   background-color: #fff;
   border: dashed #ff0000;
+}
+
+.registration-message img {
+  width: 150px;
+}
+
+.registration-footprint {
+  display: flex;
+  justify-content: space-around;
 }
