@@ -21,7 +21,7 @@
               <button id='channel-update' class="basic-btn smaller-btn">編集</button>
               {% include 'modal/update-channel.html' %}
               <button>
-                <a class="delete" href="{{ url_for('delete_channel', channelId=channel.CHANNEL_ID) }}">削除</a>
+                <a class="delete" id="delete-btn" href="{{ url_for('delete_channel', channelId=channel.CHANNEL_ID) }}">削除</a>
               </button>
             {% endif %}
           </div>
@@ -100,6 +100,11 @@
   <!-- 編集画面用モーダルの追加 -->
   <script
     src="{{url_for('static',filename='js/update-channel.js')}}"
+    type="text/javascript"
+  ></script>
+  <!-- 削除アラートの追加 -->
+  <script
+    src="{{ url_for('static', filename='js/erase-message.js') }}"
     type="text/javascript"
   ></script>
 {% endblock %}
