@@ -1,0 +1,20 @@
+.agreementimg{
+  width: 80%;
+}
+.outsideagreementimg{
+  text-align: center;
+}
+.checkbox{
+  transform: scale(2);
+}
+.checkboxmsg{
+  font-size:xx-large;
+  font-weight: bolder;
+  vertical-align:-10%;
+}
+.checkboxframe{
+  text-align: center;
+}
+button{
+  transform: scale(1.5);
+}
