@@ -183,7 +183,6 @@ def update_channel():
     userId = session.get("userId")
     if userId is None:
         return redirect('/login')
-
     #画面からチャンネル情報を取得
     channelId = request.form.get('channelId')
     channelName = request.form.get('channelName')

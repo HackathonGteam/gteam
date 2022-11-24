@@ -15,6 +15,10 @@
           <a href="{{ url_for('index') }}">チャンネル一覧に戻る</a>
         </button>
       </div>
+      {% if userId == channel.USER_ID %}
+        <button id='channel-update' class="basic-btn smaller-btn">編集</button>
+        {% include 'modal/update-channel.html' %}
+      {% endif %}
       <!--ここからチャットエリア-->
       <div id="message-area">
         <!--pythonのif文とfor文を使用し、メッセージのエラーをチェックする-->
@@ -70,4 +74,6 @@
   ></script>
   <!-- 禁止ワード -->
   <script src="{{url_for('static',filename='js/alert-message.js')}}"></script>
+  <!-- 編集画面用モーダルの追加 -->
+  <script src="{{url_for('static',filename='js/update-channel.js')}}"></script>
 {% endblock %}
