@@ -17,12 +17,13 @@
             <div class="channel-info-item message-channel-abstract">{{ channel.ABSTRACT }}</div>
           </div>
           <div class="channel-operater">
-            <button>
-              <a class="update" href="">編集</a>
-            </button>
-            <button>
-              <a class="delete" href="{{ url_for('delete_channel', channelId=channel.CHANNEL_ID) }}">削除</a>
-            </button>
+            {% if userId == channel.USER_ID %}
+              <button id='channel-update' class="basic-btn smaller-btn">編集</button>
+              {% include 'modal/update-channel.html' %}
+              <button>
+                <a class="delete" href="{{ url_for('delete_channel', channelId=channel.CHANNEL_ID) }}">削除</a>
+              </button>
+            {% endif %}
           </div>
         </div>
         <div class="header-right message-header-right">
@@ -81,6 +82,11 @@
   </div>
 {% endblock %}
 {% block script %}
+  <!-- pythonのFlaskからJSON形式でJSファイルに変数を渡す。テンプレートで使用しているJinja2の構文を利用。-->
+  <script type="text/javascript">
+    const channel = JSON.parse('{{ channel|tojson }}');
+    const userId = JSON.parse('{{ userId|tojson }}');
+  </script>
   <!-- 画面スクロール -->
   <script
     src="{{url_for('static',filename='js/scroll-message.js')}}"
