@@ -5,14 +5,25 @@
 {% block body %}
   <div class="header message-header">
     <div class="container">
-      <div class="header-contents">
+      <div class="header-contents message-header-contents">
         <div class="header-left message-header-left">
           <a href="{{ url_for('index') }}">
             <i class="header-icon fa-solid fa-circle-left"></i>
           </a>
         </div>
         <div class="header-center message-header-center">
-          <h1>{{ channel.CHANNEL_NAME }}</h1>
+          <div calss="channel-info">
+            <div class="channel-info-item message-channel-name">{{ channel.CHANNEL_NAME }}</div>
+            <div class="channel-info-item message-channel-abstract">{{ channel.ABSTRACT }}</div>
+          </div>
+          <div class="channel-operater">
+            <button>
+              <a class="update" href="">編集</a>
+            </button>
+            <button>
+              <a class="delete" href="{{ url_for('delete_channel', channelId=channel.CHANNEL_ID) }}">削除</a>
+            </button>
+          </div>
         </div>
         <div class="header-right message-header-right">
           <a href="{{ url_for('logout') }}">
@@ -22,62 +33,62 @@
       </div>
     </div>
   </div>
-  <div class="header-bottom message-header-bottom"></div>
-  <div class="main-container">
-    <div class="chat-box">
-      <!--ここからチャットエリア-->
-      <div id="message-area">
-        <!--pythonのif文とfor文を使用し、メッセージのエラーをチェックする-->
+  <div class="message-wrapper">
+    <div class="container">
+      <div class="display-message-area">
         {% if messages | length > 0 %}
           {% for message in messages %}
             {% if message.USER_ID == userId %}
               <div class="my-messages">
-                <p class="box box-right">{{ message.MESSAGE }}</p>
-                <form action="/delete_message" method="post">
-                  <input type="hidden" value="{{ channel.CHANNEL_ID }}" name="channelId" />
-                  <button
-                    class="delete-message-btn"
-                    name="messageId"
-                    value="{{ message.MESSAGE_ID }}"
-                  >削除</button>
-                </form>
+                <div class="message-box">
+                  <p class="box box-right">{{ message.MESSAGE }}</p>
+                  <form action="/delete_message" method="post">
+                    <input type="hidden" value="{{ channel.CHANNEL_ID }}" name="channelId">
+                    <input type="hidden" value="{{ message.MESSAGE_ID }}" name="messageId">
+                    <button class="delete-message-btn">
+                      <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                  </form>
+                </div>
               </div>
             {% else %}
-              <!--DBからメッセージを取得しチャットに表示する-->
-              <div class="messages">
+              <div class="other-messages">
                 <p class="user-name">{{ message.USER_NAME }}</p>
                 <p class="box box-left">{{ message.MESSAGE }}</p>
               </div>
             {% endif %}
           {% endfor %}
         {% else %}
-          <!--メッセージが入力されていなければ表示-->
           <div><p>まだメッセージがありません</p></div>
         {% endif %}
       </div>
-      <!--入力したメッセージをPOSTで”/message"へ送信-->
-      <div class="typing-box-wrapper">
+    </div>
+  </div>
+  <div class="post-message-wrapper">
+    <div class="post-message-wrapper-top"></div>
+    <div class="container">
+      <div class="typing-message-area">
         <form class="typing-box" action="/message" method="post" name="messageForm">
           <textarea name="message" id="message" autofocus></textarea>
           <input type="hidden" name="channelId" value="{{ channel.CHANNEL_ID }}">
-          <button type="submit" id="add-message-btn" name="btn" onclick="return alertMessage()">投稿</button>
+          <button onclick="return alertMessage()">
+            <i class="send-message fa-solid fa-paper-plane"></i>
+          </button>
+          <img src="../static/img/typing-dog.png" alt="">
         </form>
       </div>
     </div>
   </div>
 {% endblock %}
 {% block script %}
-  <!--pythonのFlaskからJSON形式でJSファイルに変数を渡す。
-  テンプレートで使用しているJinja2の構文を利用。-->
-  <script type="text/javascript">
-    const channel = JSON.parse('{{ channel|tojson }}');
-    const userId = JSON.parse('{{ userId|tojson }}');
-  </script>
-  <!--JSで画面がスクロールする-->
+  <!-- 画面スクロール -->
   <script
     src="{{url_for('static',filename='js/scroll-message.js')}}"
     type="text/javascript"
   ></script>
   <!-- 禁止ワード -->
-  <script src="{{url_for('static',filename='js/alert-message.js')}}"></script>
+  <script
+    src="{{url_for('static',filename='js/alert-message.js')}}"
+    type="text/javascript"
+  ></script>
 {% endblock %}

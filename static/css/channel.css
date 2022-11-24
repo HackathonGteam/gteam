@@ -1,3 +1,19 @@
+/* ヘッダー */
+
+.channel-header-left img {
+  padding: 5px 0;
+  width: 70px;
+  height: 70px;
+}
+
+.channel-header-center h1 {
+  margin: 0;
+  line-height: 80px;
+  font-size: 40px;
+  letter-spacing: 5px;
+  color: white;
+}
+
 /* チャンネル追加 */
 
 .add-channel {

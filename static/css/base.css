@@ -1,6 +1,7 @@
 body {
   margin: 0 auto;
   font-family: "Mplus 1c", sans-serif;
+  box-sizing: border-box;
 }
 
 a {
@@ -20,48 +21,22 @@ li {
 }
 
 .header-bottom {
+  height: 10px;
   background-color: var(--color_secondary);
 }
 
 .header-contents {
   display: flex;
-  justify-content: space-around;
-}
-
-.header-left {
-  width: 200px;
-}
-
-.header-left img {
-  padding: 5px 65px;
-  width: 70px;
-  height: 70px;
-}
-
-.header-right {
-  width: 200px;
+  justify-content: space-between;
 }
 
 .header-icon {
-  padding: 15px 75px;
+  padding: 15px 0;
   font-size: 50px;
 }
 
 .header-icon:hover {
   color: var(--blabk_alpha);
-}
-
-.header-bottom {
-  height: 10px;
-}
-
-.header-center h1 {
-  margin: 0;
-  font-size: 40px;
-  line-height: 80px;
-  text-align: center;
-  letter-spacing: 5px;
-  color: white;
 }
 
 /* コンテナ */
