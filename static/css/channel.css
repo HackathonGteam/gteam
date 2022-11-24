@@ -1,11 +1,17 @@
 /* ヘッダー */
 
-.channel-header {
-  background-color: var(--color_primary);
+.channel-header-left img {
+  padding: 5px 0;
+  width: 70px;
+  height: 70px;
 }
 
-.channel-header-bottom {
-  background-color: var(--color_secondary);
+.channel-header-center h1 {
+  margin: 0;
+  line-height: 80px;
+  font-size: 40px;
+  letter-spacing: 5px;
+  color: white;
 }
 
 /* チャンネル追加 */
@@ -72,15 +78,6 @@
 
 .channel-right {
   width: 150px;
-}
-
-.backToIndex-button{
-  font-size: 20px;
-  font-weight: bold;
-  width: 220px;
-  height: 30px;
-  border: 0;
-  border-radius: 20px;
 }
 
 /* チャンネル追加のボックス */

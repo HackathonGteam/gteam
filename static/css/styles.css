@@ -1,6 +1,7 @@
 @import 'color.css';
 @import 'base.css';
-@import 'registration.css';
-@import 'channel.css';
 @import 'pagination.css';
 @import 'modal.css';
+@import 'registration.css';
+@import 'channel.css';
+@import 'message.css';
