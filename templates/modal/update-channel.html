@@ -2,9 +2,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <h5>チャンネル変更</h5>
-      <img
-        class="modal-gif"
-      />
+      <img class="modal-gif">
       <span class="modalClose" id="update-page-close-btn">×</span>
     </div>
     <form class="modal-body" id="updateForm" method="POST">
@@ -13,15 +11,20 @@
         placeholder="チャンネル名"
         class="channel-form-input"
         name="channelName"
-        id="channelName"      />
+        id="channelName"
+      />
       <input
         type="text"
         placeholder="チャンネルの説明"
         class="channel-form-input"
         name="channelDescription"
       />
-      <input type="hidden" name='channelId' value='{{ channel.CHANNEL_ID }}'>
-        <button onclick="return btnUpdate()">変更</button>
+      <input
+        type="hidden"
+        name='channelId'
+        value='{{ channel.CHANNEL_ID }}'
+      />
+      <button onclick="return btnUpdate()">変更</button>
     </form>
   </div>
 </div>
