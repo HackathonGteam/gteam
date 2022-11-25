@@ -4,6 +4,8 @@ const updatePageButtonClose = document.getElementById("update-page-close-btn");
 const updateForm = document.getElementById("updateForm");
 const channelName = document.getElementById("channelName");
 const str = new RegExp('^( |　)+$');
+const channelNameVal = channelName.value
+
 
 const updateChannel = () => {
   if (userId !== channel.USER_ID) {
@@ -14,10 +16,14 @@ const updateChannel = () => {
 };
 
 function btnUpdate(){
+  let alertFlg = alertCheck(channelName.value);
   if (channelName.value == null || channelName.value == "" || str.test(channelName.value)) {
     alert("チャンネル名を入力してください");
     return false;
-  } else {
+  } else if(alertFlg) {
+    alert("不適切なワードが入っています。投稿内容を確認してください");
+    return false;
+  } else{
     updateForm.method = "POST";
     updateForm.action = "/update_channel";
     updateForm.submit();

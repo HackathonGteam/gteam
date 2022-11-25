@@ -29,9 +29,9 @@
         </div>
         <div class="add-channel-main">
           <form class="display-add-channel channel-box" action="/" method="post">
-            <input type="text" placeholder="チャンネル名" class="channel-name channel-item" name="channelName">
+            <input type="text" placeholder="チャンネル名" class="channel-name channel-item" name="channelName" id="channelName">
             <input type="text" placeholder="チャンネルの説明" class="channel-description channel-item" name="channelDescription">
-            <button class="channel-button channel-item">作成</button>
+            <button class="channel-button channel-item" onclick="return alertIndex()">作成</button>
           </form>
           <div class="channel-message">
             {% with messages = get_flashed_messages() %}
@@ -88,6 +88,10 @@
   ></script>
   <script
     src="{{ url_for('static', filename='js/erase-message.js') }}"
+    type="text/javascript"
+  ></script>
+  <script
+    src="{{ url_for('static', filename='js/alert-message.js') }}"
     type="text/javascript"
   ></script>
 {% endblock %}
