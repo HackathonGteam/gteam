@@ -162,7 +162,7 @@ def add_channel():
     channelName = request.form.get('channelName')
     channel = dbConnect.getChannelByName(channelName)
     #チャンネル名が空の場合
-    if channelName == "":
+    if (channelName == "") or (re.match(r'^\s+$', channelName)) :
         flash('チャンネル名を入力してください')
     #チャンネル名がデータベース上に存在する場合
     elif channel != None:
