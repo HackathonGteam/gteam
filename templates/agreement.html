@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+  <title>agreement</title>
+{% endblock %}
+{% block body %}
+  <div class="container">
+    <div class="agreement">
+      <img src="../static/img/agreement.png" alt="">
+      <form action="/agreement" method="POST">
+        <input type="checkbox" class="checkbox" id="check" name="agreement" value="1">
+        <label class="checkbox-label" for="check">同意する</label>
+        <input type="hidden" name="channelId" value="{{ channelId }}" >
+        <button class="checkbox-button">送信</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

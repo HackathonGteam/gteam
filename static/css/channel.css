@@ -1,11 +1,17 @@
 /* ヘッダー */
 
-.channel-header {
-  background-color: var(--header_color_primary);
+.channel-header-left img {
+  padding: 5px 0;
+  width: 70px;
+  height: 70px;
 }
 
-.channel-header-bottom {
-  background-color: var(--header_color_secondary);
+.channel-header-center h1 {
+  margin: 0;
+  line-height: 80px;
+  font-size: 40px;
+  letter-spacing: 5px;
+  color: white;
 }
 
 /* チャンネル追加 */
