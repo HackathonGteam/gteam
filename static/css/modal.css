@@ -93,21 +93,3 @@
 .modal-body button:hover {
   background-color: var(--middle_pink);
 }
-
-@media screen and (max-width: 639px) {
-  .modal-content {
-    margin: 35% auto;
-  }
-  #modal-gif {
-    display: none;
-  }
-}
-
-@media only screen and (min-width: 640px) and (max-width: 1023px) {
-  .modal-content {
-    width: 95%;
-  }
-  .modal {
-    padding-left: 80px;
-  }
-}
