@@ -192,7 +192,13 @@ def update_channel():
     dbConnect.updateChannel(userId, channelName, channelDescription, channelId)
     channel = dbConnect.getChannelById(channelId)
     messages = dbConnect.getMessageAll(channelId)
-    return render_template('detail.html', messages=messages, channel=channel, userId=userId)
+
+    # データベースから全てのチャンネル名を取得する
+    channelNames = dbConnect.getChannelNameAll()
+    # 取得したデータの整形
+    channelNames = [ d['CHANNEL_NAME'] for d in channelNames ]
+
+    return render_template('detail.html', messages=messages, channel=channel, channelNames=channelNames, userId=userId)
 
 
 @app.route('/delete/<channelId>')
@@ -215,41 +221,57 @@ def userAgreement():
     # フォームで入力された情報の取得
     agreement = request.form.get('agreement')
     channelId = request.form.get('channelId')
-    #ユーザIDのチェック
+
+    # ユーザIDのチェック
     userId = session.get('userId')
     if userId is None:
         return redirect('/login')
-    #同意がなかったらルートにはじく
-    if agreement!="1":
-        return render_template('agreement.html',channelId=channelId)
+
+    # チェックボックスがチェックされていなければ、同意ページを再表示する
+    if agreement != "1":
+        return render_template('agreement.html', channelId=channelId)
+
     session['agreement'] =agreement 
-    #detailに帰す
-    channelId = channelId
+
     # データベースからチャンネルを取得する
     channel = dbConnect.getChannelById(channelId)
+
+    # データベースから全てのチャンネル名を取得する
+    channelNames = dbConnect.getChannelNameAll()
+    # 取得したデータの整形
+    channelNames = [ d['CHANNEL_NAME'] for d in channelNames ]
+
     # データベースから全てのメッセージを取得する
     messages = dbConnect.getMessageAll(channelId)
-    return render_template('detail.html', messages=messages, channel=channel, userId=userId)
+
+    return render_template('detail.html', messages=messages, channel=channel, channelNames=channelNames, userId=userId)
 
 
 # メッセージ一覧機能
 @app.route('/detail/<channelId>')
 def detail(channelId):
     userId = session.get('userId')
-    agreement=session.get('agreement')
-    # もしuidが空だったらログインページにリダイレクト
+    agreement = session.get('agreement')
+
+    # もしuserIdが空だったらログインページにリダイレクト
     if userId is None:
         return redirect('/login')
-    #もしagreementが空だったらagreementにリダイレクト
+    # もしagreementが空だったら同意ページにリダイレクト
     if agreement is None:
-        return render_template('agreement.html',channelId = channelId)
-    channelId = channelId
+        return render_template('agreement.html', channelId = channelId)
+
     # データベースからチャンネルを取得する
     channel = dbConnect.getChannelById(channelId)
+
+    # データベースから全てのチャンネル名を取得する
+    channelNames = dbConnect.getChannelNameAll()
+    # 取得したデータの整形
+    channelNames = [ d['CHANNEL_NAME'] for d in channelNames ]
+
     # データベースから全てのメッセージを取得する
     messages = dbConnect.getMessageAll(channelId)
 
-    return render_template('detail.html', messages=messages, channel=channel, userId=userId)
+    return render_template('detail.html', messages=messages, channel=channel, channelNames=channelNames, userId=userId)
 
 
 # メッセージ作成機能
@@ -274,7 +296,12 @@ def add_message():
     # データベースから全てのメッセージを取得する
     messages = dbConnect.getMessageAll(channelId)
 
-    return render_template('detail.html', messages=messages, channel=channel, userId=userId)
+    # データベースから全てのチャンネル名を取得する
+    channelNames = dbConnect.getChannelNameAll()
+    # 取得したデータの整形
+    channelNames = [ d['CHANNEL_NAME'] for d in channelNames ]
+
+    return render_template('detail.html', messages=messages, channel=channel, channelNames=channelNames, userId=userId)
 
 
 # メッセージ削除機能
@@ -298,7 +325,12 @@ def delete_message():
     # データベースから全てのメッセージを取得する
     messages = dbConnect.getMessageAll(channelId)
 
-    return render_template('detail.html', messages=messages, channel=channel, userId=userId)
+    # データベースから全てのチャンネル名を取得する
+    channelNames = dbConnect.getChannelNameAll()
+    # 取得したデータの整形
+    channelNames = [ d['CHANNEL_NAME'] for d in channelNames ]
+
+    return render_template('detail.html', messages=messages, channel=channel, channelNames=channelNames, userId=userId)
 
 
 if __name__ == "__main__":

@@ -20,10 +20,13 @@ function btnUpdate(){
   if (channelName.value == null || channelName.value == "" || str.test(channelName.value)) {
     alert("チャンネル名を入力してください");
     return false;
-  } else if(alertFlg) {
+  } else if (alertFlg) {
     alert("不適切なワードが入っています。投稿内容を確認してください");
     return false;
-  } else{
+  } else if (channelNames.includes(channelName.value)) {
+    alert("既に同じ名前のチャンネルが存在しています");
+    return false;
+  } else {
     updateForm.method = "POST";
     updateForm.action = "/update_channel";
     updateForm.submit();

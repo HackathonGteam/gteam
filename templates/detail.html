@@ -85,6 +85,7 @@
   <!-- pythonのFlaskからJSON形式でJSファイルに変数を渡す。テンプレートで使用しているJinja2の構文を利用。-->
   <script type="text/javascript">
     const channel = JSON.parse('{{ channel|tojson }}');
+    const channelNames = JSON.parse('{{ channelNames|tojson }}');
     const userId = JSON.parse('{{ userId|tojson }}');
   </script>
   <!-- 画面スクロール -->
