@@ -67,6 +67,23 @@ class dbConnect:
             conn.close()
 
 
+    # チャンネル名を全て取得する
+    def getChannelNameAll():
+        try:
+            conn = DB.getConnection()
+            cur = conn.cursor()
+            sql = "SELECT CHANNEL_NAME FROM CHANNELS;"
+            cur.execute(sql)
+            channelNames = cur.fetchall()
+            return channelNames
+        except Exception as e:
+            print(e + 'が発生しています')
+            return None
+        finally:
+            cur.close()
+            conn.close()
+
+
     # チャンネルIDでチャンネルを取得
     def getChannelById(channelId):
         try:
