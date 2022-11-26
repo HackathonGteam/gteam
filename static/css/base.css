@@ -1,0 +1,47 @@
+body {
+  margin: 0 auto;
+  font-family: "Mplus 1c", sans-serif;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+li {
+  list-style: none;
+}
+
+/* ヘッダー */
+
+.header {
+  height: 80px;
+  background-color: var(--color_primary);
+}
+
+.header-bottom {
+  height: 10px;
+  background-color: var(--color_secondary);
+}
+
+.header-contents {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-icon {
+  padding: 15px 0;
+  font-size: 50px;
+}
+
+.header-icon:hover {
+  color: var(--blabk_alpha);
+}
+
+/* コンテナ */
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}

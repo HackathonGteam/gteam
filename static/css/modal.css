@@ -1,0 +1,88 @@
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(240, 240, 240, 0.5);
+}
+
+.modal-content {
+  position: relative;
+  width: 70%;
+  margin: 10% auto;
+  border-radius: 20px;
+  background-color: #f0f0f0;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.17);
+  animation-name: modalopen;
+  animation-duration: 1s;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 15px 3px 32px;
+  border-radius: 20px 20px 0 0;
+  color: white;
+  background: var(--color_secondary);
+}
+
+.modalClose {
+  font-size: 2rem;
+}
+
+.modalClose:hover {
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.channel-form-input {
+  padding: 7px;
+  font-size: 17px;
+  width: 70%;
+  margin: 10px 0;
+  border: 2px solid var(--color_secondary);
+}
+
+.channel-form-input:focus {
+  border: 2px solid var(--color_primary);
+  outline: none;
+}
+
+#bar {
+  height: 39px;
+  width: 32px;
+}
+
+.modal-gif {
+  position: absolute;
+  z-index: 2;
+  top: -66px;
+  left: 30%;
+}
+
+.modal-body button {
+  color: white;
+  background-color: var(--color_secondary);
+}
+
+.modal-body button:hover {
+  background-color: var(--color_primary);
+}
